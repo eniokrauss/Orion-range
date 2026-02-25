@@ -131,6 +131,13 @@ Enterprise extensions and advanced orchestration modules are developed separatel
 
 ---
 
+## Legal Notice
+
+Orion Range is an independent open-source project developed by Kra2Sec.
+It is not affiliated with any institutional cyber range platform.
+
+---
+
 ## Maintained By
 
 Kra2Sec  
