@@ -148,7 +148,7 @@ Enterprise extensions and advanced orchestration modules are developed separatel
 Kra2Sec  
 https://kra2sec.com
 
-Founder & Lead Maintainer: Ênio Krauss
+Founder & Lead Maintainer: Ênio Krauss Jr
 
 ---
 
