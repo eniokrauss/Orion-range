@@ -152,3 +152,5 @@ Founder & Lead Maintainer: Ênio Krauss
 Our goal is to provide an open and extensible foundation for building structured cyber simulation environments — bridging the gap between isolated lab setups and full-scale operational cyber range platforms.
 
 Orion Range aims to make advanced cyber training reproducible, scalable, and accessible.
+
+ 
