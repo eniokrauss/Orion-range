@@ -22,6 +22,18 @@ Orion Range focuses on operational realism — modeling interconnected systems r
 
 ---
 
+## Conceptual Architecture
+
+A high-level conceptual architecture diagram showing how Orion Range
+organizes Lab Blueprints, orchestration, provisioning, snapshots, and MITRE ATT&CK modules.
+
+<p align="center">
+  <img src="docs/images/Conceptual Architecture.png" alt="Orion Range Conceptual Architecture" width="800">
+</p>
+
+
+---
+
 ## Core Features (Open-Source Core)
 
 - Infrastructure Blueprint Engine
@@ -146,10 +158,4 @@ Our goal is to provide an open and extensible foundation for building structured
 
 Orion Range aims to make advanced cyber training reproducible, scalable, and accessible.
 
----
 
-## Conceptual Architecture
-
-<p align="center">
-  <img src="docs/images/Conceptual Architecture.png" alt="Orion Range Conceptual Architecture" width="800">
-</p>
