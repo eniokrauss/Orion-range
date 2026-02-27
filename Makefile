@@ -1,7 +1,7 @@
-.PHONY: backend-setup backend-run backend-test backend-compile backend-ci
+codex/verify-the-structure-m8z187
+.PHONY: backend-setup backend-run backend-test backend-compile backend-ci backend-migrate-sql
 
 backend-setup:
-codex/verify-the-structure-kqxjtv
 	cd backend && python -m venv .venv && . .venv/bin/activate && pip install '.[dev]'
 main
 
@@ -15,3 +15,9 @@ backend-compile:
 	python -m compileall backend/app
 
 backend-ci: backend-compile backend-test
+codex/verify-the-structure-m8z187
+
+backend-migrate-sql:
+	@echo "Apply SQL files in backend/migrations with your DB client (psql)."
+	@ls -1 backend/migrations/*.sql
+main

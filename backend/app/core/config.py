@@ -10,6 +10,9 @@ class Settings(BaseSettings):
     app_description: str = "Open-source Cyber Range Orchestrator (Core)"
     orion_env: str = Field(default="dev", description="Runtime environment")
     log_level: str = Field(default="INFO", description="Application log level")
+codex/verify-the-structure-m8z187
+    database_url: str = Field(default="sqlite:///./orion.db", description="Database connection URL")
+main
 
 
 settings = Settings()

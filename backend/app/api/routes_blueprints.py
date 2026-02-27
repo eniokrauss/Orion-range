@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException
 
 from app.schemas.blueprint import LabBlueprint
-codex/verify-the-structure-kqxjtv
-from app.services.blueprint_store import BlueprintNotFoundError, blueprint_store
+codex/verify-the-structure-m8z187
+from app.services.blueprint_repository import BlueprintNotFoundError, blueprint_repository
 main
 from app.services.blueprint_validator import BlueprintError, validate_blueprint
 
@@ -23,7 +23,8 @@ def validate_blueprint_route(blueprint: LabBlueprint):
         "nodes": len(blueprint.nodes),
         "networks": len(blueprint.networks),
     }
-codex/verify-the-structure-kqxjtv
+codex/verify-the-structure-m8z187
+main
 
 
 @router.post("")
@@ -33,26 +34,31 @@ def create_blueprint(blueprint: LabBlueprint):
     except BlueprintError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
-    stored = blueprint_store.create(blueprint)
+codex/verify-the-structure-m8z187
+    stored = blueprint_repository.create(blueprint)
+    payload = stored.payload
     return {
-        "id": stored.blueprint_id,
-        "name": stored.blueprint.name,
-        "version": stored.blueprint.version,
-        "nodes": len(stored.blueprint.nodes),
-        "networks": len(stored.blueprint.networks),
+        "id": stored.id,
+        "name": stored.name,
+        "version": stored.version,
+        "nodes": len(payload.get("nodes", [])),
+        "networks": len(payload.get("networks", [])),
+main
     }
 
 
 @router.get("")
 def list_blueprints():
-    items = blueprint_store.list()
+codex/verify-the-structure-m8z187
+    items = blueprint_repository.list()
     return [
         {
-            "id": item.blueprint_id,
-            "name": item.blueprint.name,
-            "version": item.blueprint.version,
-            "nodes": len(item.blueprint.nodes),
-            "networks": len(item.blueprint.networks),
+            "id": item.id,
+            "name": item.name,
+            "version": item.version,
+            "nodes": len(item.payload.get("nodes", [])),
+            "networks": len(item.payload.get("networks", [])),
+main
         }
         for item in items
     ]
@@ -61,20 +67,25 @@ def list_blueprints():
 @router.get("/{blueprint_id}")
 def get_blueprint(blueprint_id: str):
     try:
-        item = blueprint_store.get(blueprint_id)
+codex/verify-the-structure-m8z187
+        item = blueprint_repository.get(blueprint_id)
+main
     except BlueprintNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
 
     return {
-        "id": item.blueprint_id,
-        "blueprint": item.blueprint.model_dump(),
+codex/verify-the-structure-m8z187
+        "id": item.id,
+        "blueprint": item.payload,
+main
     }
 
 
 @router.delete("/{blueprint_id}", status_code=204)
 def delete_blueprint(blueprint_id: str):
     try:
-        blueprint_store.delete(blueprint_id)
+codex/verify-the-structure-m8z187
+        blueprint_repository.delete(blueprint_id)
     except BlueprintNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
     return None

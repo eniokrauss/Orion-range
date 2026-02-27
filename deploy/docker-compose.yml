@@ -1,10 +1,31 @@
 services:
+codex/verify-the-structure-m8z187
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: orion
+      POSTGRES_USER: orion
+      POSTGRES_PASSWORD: orion
+    ports:
+      - "5432:5432"
+    volumes:
+      - orion-postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+main
   orion-api:
     build:
       context: ..
       dockerfile: backend/Dockerfile
     env_file:
       - ./env.example
+codex/verify-the-structure-m8z187
+    depends_on:
+      - postgres
     ports:
       - "8000:8000"
     restart: unless-stopped
+
+volumes:
+  orion-postgres-data:
+main
