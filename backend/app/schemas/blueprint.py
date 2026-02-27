@@ -1,3 +1,5 @@
+"""Blueprint domain schemas used by the validation API."""
+
 from typing import Annotated, List, Optional
 
 from pydantic import BaseModel, Field, StringConstraints, field_validator

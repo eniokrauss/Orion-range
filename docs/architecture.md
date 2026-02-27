@@ -27,8 +27,8 @@ A fase atual entrega a fundação do backend com FastAPI e três blocos principa
    - CIDR de rede deve ser válido quando informado.
    - Cada nó deve referenciar ao menos uma rede e sem duplicações.
 4. API retorna:
-   - `200` com resumo quando válido (campos `nodes`/`networks` e `summary` para compatibilidade).
-   - `400` com erro padronizado (`code` + `message`) quando inválido.
+   - `200` com resumo (`name`, `version`, `nodes`, `networks`).
+   - `400` com detalhe textual de erro quando inválido.
 
 ## Execução local
 

@@ -16,10 +16,13 @@ def test_validate_blueprint_success():
     response = client.post("/blueprints/validate", json=payload)
     assert response.status_code == 200
     body = response.json()
-    assert body["valid"] is True
-    assert body["nodes"] == 1
-    assert body["networks"] == 1
-    assert body["summary"] == {"nodes": 1, "networks": 1}
+    assert body == {
+        "valid": True,
+        "name": "sample-lab",
+        "version": "0.1.0",
+        "nodes": 1,
+        "networks": 1,
+    }
 
 
 def test_validate_blueprint_normalizes_short_version():
@@ -44,10 +47,7 @@ def test_validate_blueprint_unknown_network():
 
     response = client.post("/blueprints/validate", json=payload)
     assert response.status_code == 400
-    detail = response.json()["detail"]
-    assert detail["code"] == "BLUEPRINT_VALIDATION_ERROR"
-    assert "unknown networks" in detail["message"]
-    assert detail["legacy_detail"] == detail["message"]
+    assert "unknown networks" in response.json()["detail"]
 
 
 def test_validate_blueprint_invalid_cidr():
@@ -59,7 +59,7 @@ def test_validate_blueprint_invalid_cidr():
 
     response = client.post("/blueprints/validate", json=payload)
     assert response.status_code == 400
-    assert "invalid CIDR" in response.json()["detail"]["message"]
+    assert "invalid CIDR" in response.json()["detail"]
 
 
 def test_validate_blueprint_node_without_network():
@@ -71,4 +71,4 @@ def test_validate_blueprint_node_without_network():
 
     response = client.post("/blueprints/validate", json=payload)
     assert response.status_code == 400
-    assert "must reference at least one network" in response.json()["detail"]["message"]
+    assert "must reference at least one network" in response.json()["detail"]

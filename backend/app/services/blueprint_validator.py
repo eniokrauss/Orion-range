@@ -1,3 +1,5 @@
+"""Semantic validation rules for lab blueprints."""
+
 import ipaddress
 
 from app.schemas.blueprint import LabBlueprint
