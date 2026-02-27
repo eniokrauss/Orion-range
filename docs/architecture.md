@@ -19,7 +19,7 @@ A fase atual entrega a fundação do backend com FastAPI e três blocos principa
 ## Fluxo de validação de Blueprint
 
 1. Cliente envia `POST /blueprints/validate`.
-2. API desserializa payload para `LabBlueprint` (Pydantic), aceitando `version` em `x.y` ou `x.y.z` (normalizado para `x.y.z`).
+2. API desserializa payload para `LabBlueprint` (Pydantic) e normaliza `version` de `x.y` para `x.y.z`.
 3. Serviço `validate_blueprint` executa regras semânticas:
    - Nomes de redes únicos.
    - Nomes de nós únicos.

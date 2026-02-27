@@ -5,7 +5,7 @@ from app.main import app
 client = TestClient(app)
 
 
-def test_validate_blueprint_success():
+def test_validate_blueprint_success_response_shape():
     payload = {
         "name": "sample-lab",
         "version": "0.1.0",
@@ -38,7 +38,7 @@ def test_validate_blueprint_normalizes_short_version():
     assert response.json()["version"] == "0.2.0"
 
 
-def test_validate_blueprint_unknown_network():
+def test_validate_blueprint_unknown_network_returns_400():
     payload = {
         "name": "invalid-lab",
         "networks": [{"name": "corp-net"}],
