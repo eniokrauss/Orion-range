@@ -24,9 +24,13 @@ A fase atual entrega a fundação do backend com FastAPI e três blocos principa
    - Nomes de redes únicos.
    - Nomes de nós únicos.
    - Nós só podem referenciar redes existentes.
+codex/verify-the-structure-58xbkj
+   - CIDR de rede deve ser válido quando informado.
+   - Cada nó deve referenciar ao menos uma rede e sem duplicações.
 4. API retorna:
-   - `200` com resumo quando válido.
-   - `400` com detalhe de erro quando inválido.
+   - `200` com resumo (`name`, `version`, `nodes`, `networks`).
+   - `400` com detalhe textual de erro quando inválido.
+main
 
 ## Execução local
 
