@@ -19,12 +19,17 @@ def validate_blueprint_route(blueprint: LabBlueprint):
             },
         ) from exc
 
+    nodes_count = len(blueprint.nodes)
+    networks_count = len(blueprint.networks)
+
     return {
         "valid": True,
         "name": blueprint.name,
         "version": blueprint.version,
+        "nodes": nodes_count,
+        "networks": networks_count,
         "summary": {
-            "nodes": len(blueprint.nodes),
-            "networks": len(blueprint.networks),
+            "nodes": nodes_count,
+            "networks": networks_count,
         },
     }

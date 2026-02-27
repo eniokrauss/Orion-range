@@ -1,6 +1,6 @@
 from typing import Annotated, List, Optional
 
-from pydantic import BaseModel, Field, StringConstraints
+from pydantic import BaseModel, Field, StringConstraints, field_validator
 
 BlueprintString = Annotated[str, StringConstraints(min_length=1, strip_whitespace=True)]
 
@@ -25,6 +25,18 @@ class NodeBP(BaseModel):
 
 class LabBlueprint(BaseModel):
     name: BlueprintString
-    version: str = Field(default="0.1.0", pattern=r"^\d+\.\d+\.\d+$")
+    version: str = Field(default="0.1.0")
     networks: List[NetworkBP] = Field(default_factory=list)
     nodes: List[NodeBP] = Field(default_factory=list)
+
+    @field_validator("version")
+    @classmethod
+    def validate_version(cls, value: str) -> str:
+        parts = value.split(".")
+        if len(parts) == 2 and all(part.isdigit() for part in parts):
+            return f"{parts[0]}.{parts[1]}.0"
+
+        if len(parts) == 3 and all(part.isdigit() for part in parts):
+            return value
+
+        raise ValueError("version must follow numeric semantic format: x.y or x.y.z")

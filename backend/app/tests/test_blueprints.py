@@ -17,7 +17,22 @@ def test_validate_blueprint_success():
     assert response.status_code == 200
     body = response.json()
     assert body["valid"] is True
+    assert body["nodes"] == 1
+    assert body["networks"] == 1
     assert body["summary"] == {"nodes": 1, "networks": 1}
+
+
+def test_validate_blueprint_normalizes_short_version():
+    payload = {
+        "name": "sample-lab",
+        "version": "0.2",
+        "networks": [{"name": "corp-net"}],
+        "nodes": [{"name": "ws01", "networks": ["corp-net"]}],
+    }
+
+    response = client.post("/blueprints/validate", json=payload)
+    assert response.status_code == 200
+    assert response.json()["version"] == "0.2.0"
 
 
 def test_validate_blueprint_unknown_network():

@@ -19,7 +19,7 @@ A fase atual entrega a fundação do backend com FastAPI e três blocos principa
 ## Fluxo de validação de Blueprint
 
 1. Cliente envia `POST /blueprints/validate`.
-2. API desserializa payload para `LabBlueprint` (Pydantic).
+2. API desserializa payload para `LabBlueprint` (Pydantic), aceitando `version` em `x.y` ou `x.y.z` (normalizado para `x.y.z`).
 3. Serviço `validate_blueprint` executa regras semânticas:
    - Nomes de redes únicos.
    - Nomes de nós únicos.
@@ -27,7 +27,7 @@ A fase atual entrega a fundação do backend com FastAPI e três blocos principa
    - CIDR de rede deve ser válido quando informado.
    - Cada nó deve referenciar ao menos uma rede e sem duplicações.
 4. API retorna:
-   - `200` com resumo quando válido.
+   - `200` com resumo quando válido (campos `nodes`/`networks` e `summary` para compatibilidade).
    - `400` com erro padronizado (`code` + `message`) quando inválido.
 
 ## Execução local
