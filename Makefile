@@ -1,7 +1,7 @@
 .PHONY: backend-setup backend-run backend-test backend-compile backend-ci
 
 backend-setup:
-codex/verify-the-structure-3amvss
+codex/verify-the-structure-kqxjtv
 	cd backend && python -m venv .venv && . .venv/bin/activate && pip install '.[dev]'
 main
 
