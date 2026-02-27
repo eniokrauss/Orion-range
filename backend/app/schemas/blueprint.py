@@ -23,7 +23,7 @@ class NodeBP(BaseModel):
 
 class LabBlueprint(BaseModel):
     name: str = Field(min_length=1)
-codex/verify-the-structure-tqv7s2
+codex/verify-the-structure-3amvss
     version: str = "0.1.0"
 main
     networks: List[NetworkBP] = Field(default_factory=list)
