@@ -5,16 +5,22 @@ from app.main import app
 client = TestClient(app)
 
 
+codex/verify-the-structure-tqv7s2
+main
 def test_validate_blueprint_success_response_shape():
     payload = {
         "name": "sample-lab",
         "version": "0.1.0",
+codex/verify-the-structure-tqv7s2
+main
         "networks": [{"name": "corp-net", "cidr": "10.10.10.0/24"}],
         "nodes": [{"name": "dc01", "role": "domain-controller", "networks": ["corp-net"]}],
     }
 
     response = client.post("/blueprints/validate", json=payload)
     assert response.status_code == 200
+codex/verify-the-structure-tqv7s2
+main
     body = response.json()
     assert body == {
         "valid": True,
@@ -26,6 +32,8 @@ def test_validate_blueprint_success_response_shape():
 
 
 def test_validate_blueprint_unknown_network_returns_400():
+codex/verify-the-structure-tqv7s2
+main
     payload = {
         "name": "invalid-lab",
         "networks": [{"name": "corp-net"}],
@@ -35,6 +43,8 @@ def test_validate_blueprint_unknown_network_returns_400():
     response = client.post("/blueprints/validate", json=payload)
     assert response.status_code == 400
     assert "unknown networks" in response.json()["detail"]
+codex/verify-the-structure-tqv7s2
+main
 
 
 def test_validate_blueprint_invalid_cidr():
@@ -59,3 +69,5 @@ def test_validate_blueprint_node_without_network():
     response = client.post("/blueprints/validate", json=payload)
     assert response.status_code == 400
     assert "must reference at least one network" in response.json()["detail"]
+codex/verify-the-structure-tqv7s2
+main
