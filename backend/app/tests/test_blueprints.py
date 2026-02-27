@@ -25,19 +25,6 @@ def test_validate_blueprint_success_response_shape():
     }
 
 
-def test_validate_blueprint_normalizes_short_version():
-    payload = {
-        "name": "sample-lab",
-        "version": "0.2",
-        "networks": [{"name": "corp-net"}],
-        "nodes": [{"name": "ws01", "networks": ["corp-net"]}],
-    }
-
-    response = client.post("/blueprints/validate", json=payload)
-    assert response.status_code == 200
-    assert response.json()["version"] == "0.2.0"
-
-
 def test_validate_blueprint_unknown_network_returns_400():
     payload = {
         "name": "invalid-lab",

@@ -18,8 +18,8 @@ def _duplicate_values(values: list[str]) -> set[str]:
 
 
 def validate_blueprint(bp: LabBlueprint) -> None:
-    network_names = [network.name for network in bp.networks]
-    duplicate_networks = _duplicate_values(network_names)
+    net_names = [network.name for network in bp.networks]
+    duplicate_networks = _duplicate_values(net_names)
     if duplicate_networks:
         raise BlueprintError(f"Duplicate network names are not allowed: {sorted(duplicate_networks)}")
 
@@ -37,7 +37,7 @@ def validate_blueprint(bp: LabBlueprint) -> None:
     if duplicate_nodes:
         raise BlueprintError(f"Duplicate node names are not allowed: {sorted(duplicate_nodes)}")
 
-    known_networks = set(network_names)
+    known_networks = set(net_names)
     for node in bp.nodes:
         if not node.networks:
             raise BlueprintError(f"Node '{node.name}' must reference at least one network.")
