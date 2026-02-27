@@ -6,14 +6,18 @@ build-backend = "setuptools.build_meta"
 name = "orion-range-core"
 version = "0.1.0"
 description = "Orion Range Core backend"
+codex/verify-the-structure-m8z187
 readme = "README.md"
+main
 requires-python = ">=3.11"
 dependencies = [
   "fastapi>=0.115.0,<1.0.0",
   "uvicorn[standard]>=0.30.0,<1.0.0",
   "pydantic-settings>=2.4.0,<3.0.0",
+codex/verify-the-structure-m8z187
   "sqlalchemy>=2.0.36,<3.0.0",
   "psycopg[binary]>=3.2.0,<4.0.0",
+main
 ]
 
 [project.optional-dependencies]

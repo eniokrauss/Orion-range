@@ -13,9 +13,11 @@
 - [ ] Standardize API error codes for machine-consumable clients.
 
 ## Etapa 2 — Persistence layer
+codex/verify-the-structure-m8z187
 - [x] Add PostgreSQL service to compose stack.
 - [x] Introduce ORM models and migrations.
 - [x] Add CRUD endpoints for blueprint lifecycle.
+main
 
 ## Etapa 3 — Job orchestration
 - [ ] Implement async job model (`pending/running/succeeded/failed`).
