@@ -84,6 +84,24 @@ It is not designed for offensive use outside authorized and legal environments.
 
 ---
 
+codex/verify-the-structure-tqv7s2
+## Development Execution Order
+
+To deliver the project in full, execution follows `ROADMAP.md` in this order:
+
+1. Foundation and delivery reliability
+2. Blueprint contract hardening
+3. Persistence layer
+4. Job orchestration
+5. Hypervisor adapter (Proxmox-first)
+6. Baseline snapshot and deterministic reset
+7. Scenario simulation engine
+8. MITRE ATT&CK plugin support
+9. Production hardening
+
+---
+
+main
 ## Roadmap
 
 Planned milestones:

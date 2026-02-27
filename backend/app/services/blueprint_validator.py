@@ -1,4 +1,4 @@
-codex/verify-the-structure-58xbkj
+codex/verify-the-structure-tqv7s2
 import ipaddress
 
 main
@@ -20,14 +20,15 @@ def _duplicate_values(values: list[str]) -> set[str]:
 
 
 def validate_blueprint(bp: LabBlueprint) -> None:
-codex/verify-the-structure-58xbkj
+codex/verify-the-structure-tqv7s2
     net_names = [network.name for network in bp.networks]
 main
     duplicate_networks = _duplicate_values(net_names)
     if duplicate_networks:
         raise BlueprintError(f"Duplicate network names are not allowed: {sorted(duplicate_networks)}")
 
-codex/verify-the-structure-58xbkj
+codex/verify-the-structure-tqv7s2
+main
     for network in bp.networks:
         if network.cidr:
             try:
@@ -38,6 +39,7 @@ codex/verify-the-structure-58xbkj
                 ) from exc
 
     node_names = [node.name for node in bp.nodes]
+codex/verify-the-structure-tqv7s2
 main
     duplicate_nodes = _duplicate_values(node_names)
     if duplicate_nodes:
@@ -45,7 +47,8 @@ main
 
     known_networks = set(net_names)
     for node in bp.nodes:
-codex/verify-the-structure-58xbkj
+codex/verify-the-structure-tqv7s2
+main
         if not node.networks:
             raise BlueprintError(f"Node '{node.name}' must reference at least one network.")
 
@@ -59,6 +62,7 @@ codex/verify-the-structure-58xbkj
         if unknown_networks:
             raise BlueprintError(
                 f"Node '{node.name}' references unknown networks: {unknown_networks}. "
- main
+codex/verify-the-structure-tqv7s2
+main
                 "Declare the network in blueprint.networks first."
             )
