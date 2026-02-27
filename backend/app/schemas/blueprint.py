@@ -1,22 +1,30 @@
-from pydantic import BaseModel, Field
-from typing import List, Optional
+from typing import Annotated, List, Optional
+
+from pydantic import BaseModel, Field, StringConstraints
+
+BlueprintString = Annotated[str, StringConstraints(min_length=1, strip_whitespace=True)]
+
 
 class NetworkBP(BaseModel):
-    name: str
+    name: BlueprintString
     cidr: Optional[str] = None
-    vlan_id: Optional[int] = None
+    vlan_id: Optional[int] = Field(default=None, ge=1, le=4094)
+
 
 class NodeBP(BaseModel):
-    name: str
-    role: str = "generic"
-    os: str = "linux"
+    name: BlueprintString
+    role: BlueprintString = "generic"
+    os: BlueprintString = "linux"
+    networks: List[BlueprintString] = Field(default_factory=list)
     proxmox_template_vmid: Optional[int] = Field(
         default=None,
         description="Future: VMID of a Proxmox template to clone from",
+        ge=100,
     )
 
+
 class LabBlueprint(BaseModel):
-    name: str
-    version: str = "0.1"
-    networks: List[NetworkBP] = []
-    nodes: List[NodeBP] = []
+    name: BlueprintString
+    version: str = Field(default="0.1.0", pattern=r"^\d+\.\d+\.\d+$")
+    networks: List[NetworkBP] = Field(default_factory=list)
+    nodes: List[NodeBP] = Field(default_factory=list)

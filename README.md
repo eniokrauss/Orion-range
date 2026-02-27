@@ -101,7 +101,28 @@ Planned milestones:
 
 > ⚠ Orion Range is currently under active development.
 
-Instructions will be provided as the core stabilizes.
+### Backend local run
+
+```bash
+cd backend
+python -m venv .venv
+source .venv/bin/activate
+pip install -e .[dev]
+uvicorn app.main:app --reload
+```
+
+### Running tests
+
+```bash
+cd backend
+pytest
+```
+
+### Docker Compose
+
+```bash
+docker compose -f deploy/docker-compose.yml up --build
+```
 
 ---
 
