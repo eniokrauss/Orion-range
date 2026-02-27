@@ -1,5 +1,7 @@
+codex/verify-the-structure-f8kehq
 import ipaddress
 
+main
 from app.schemas.blueprint import LabBlueprint
 
 
@@ -18,11 +20,15 @@ def _duplicate_values(values: list[str]) -> set[str]:
 
 
 def validate_blueprint(bp: LabBlueprint) -> None:
+codex/verify-the-structure-f8kehq
     net_names = [network.name for network in bp.networks]
+main
     duplicate_networks = _duplicate_values(net_names)
     if duplicate_networks:
         raise BlueprintError(f"Duplicate network names are not allowed: {sorted(duplicate_networks)}")
 
+codex/verify-the-structure-f8kehq
+main
     for network in bp.networks:
         if network.cidr:
             try:
@@ -33,12 +39,16 @@ def validate_blueprint(bp: LabBlueprint) -> None:
                 ) from exc
 
     node_names = [node.name for node in bp.nodes]
+codex/verify-the-structure-f8kehq
+main
     duplicate_nodes = _duplicate_values(node_names)
     if duplicate_nodes:
         raise BlueprintError(f"Duplicate node names are not allowed: {sorted(duplicate_nodes)}")
 
     known_networks = set(net_names)
     for node in bp.nodes:
+codex/verify-the-structure-f8kehq
+main
         if not node.networks:
             raise BlueprintError(f"Node '{node.name}' must reference at least one network.")
 
@@ -52,5 +62,7 @@ def validate_blueprint(bp: LabBlueprint) -> None:
         if unknown_networks:
             raise BlueprintError(
                 f"Node '{node.name}' references unknown networks: {unknown_networks}. "
+codex/verify-the-structure-f8kehq
+main
                 "Declare the network in blueprint.networks first."
             )

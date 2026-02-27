@@ -84,6 +84,8 @@ It is not designed for offensive use outside authorized and legal environments.
 
 ---
 
+codex/verify-the-structure-f8kehq
+main
 ## Development Execution Order
 
 To deliver the project in full, execution follows `ROADMAP.md` in this order:
@@ -100,6 +102,8 @@ To deliver the project in full, execution follows `ROADMAP.md` in this order:
 
 ---
 
+codex/verify-the-structure-f8kehq
+main
 ## Roadmap
 
 Planned milestones:
