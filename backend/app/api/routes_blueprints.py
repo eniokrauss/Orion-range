@@ -1,7 +1,9 @@
 from fastapi import APIRouter, HTTPException
 
 from app.schemas.blueprint import LabBlueprint
+codex/verify-the-structure-kqxjtv
 from app.services.blueprint_store import BlueprintNotFoundError, blueprint_store
+main
 from app.services.blueprint_validator import BlueprintError, validate_blueprint
 
 router = APIRouter(prefix="/blueprints")
@@ -21,6 +23,7 @@ def validate_blueprint_route(blueprint: LabBlueprint):
         "nodes": len(blueprint.nodes),
         "networks": len(blueprint.networks),
     }
+codex/verify-the-structure-kqxjtv
 
 
 @router.post("")
@@ -75,3 +78,4 @@ def delete_blueprint(blueprint_id: str):
     except BlueprintNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
     return None
+main

@@ -2,18 +2,21 @@
 
 ## Visão Geral
 
+codex/verify-the-structure-kqxjtv
 A fase atual entrega a fundação do backend com FastAPI e quatro blocos principais:
 
 - **API layer**: rotas de health, version, validação e CRUD de blueprint.
 - **Domain schemas**: modelos Pydantic para blueprint de laboratório.
 - **Services**: validação semântica de blueprints.
 - **Store**: persistência em memória para ciclo de vida de blueprints (transitória).
+main
 
 ## Estrutura
 
 - `backend/app/main.py`: bootstrap da aplicação e registro de rotas.
 - `backend/app/api/`: endpoints HTTP.
 - `backend/app/schemas/`: contratos de dados.
+codex/verify-the-structure-kqxjtv
 - `backend/app/services/`: regras de negócio e store em memória.
 - `backend/app/core/`: configurações e logging.
 
@@ -35,6 +38,7 @@ A fase atual entrega a fundação do backend com FastAPI e quatro blocos princip
 ## Observação sobre persistência
 
 A store atual é **em memória** e não persiste reinícios do processo. A próxima etapa do roadmap substitui essa camada por banco de dados.
+main
 
 ## Execução local
 

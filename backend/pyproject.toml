@@ -6,7 +6,9 @@ build-backend = "setuptools.build_meta"
 name = "orion-range-core"
 version = "0.1.0"
 description = "Orion Range Core backend"
+codex/verify-the-structure-kqxjtv
 readme = "README.md"
+main
 requires-python = ">=3.11"
 dependencies = [
   "fastapi>=0.115.0,<1.0.0",
