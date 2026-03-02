@@ -1,17 +1,20 @@
-codex/verify-the-structure-59nncd
-# Orion Range Core Architecture (Fase 3)
+codex/verify-the-structure-m2jj1r
+# Orion Range Core Architecture (Fase 4)
+main
 
 ## Visão Geral
 
 A fase atual entrega backend FastAPI com validação semântica, persistência de blueprints e orquestração básica de jobs:
+codex/verify-the-structure-m2jj1r
 main
 
 - **API layer**: rotas de health, version, validação e CRUD de blueprint.
 - **Domain schemas**: modelos Pydantic para blueprint de laboratório.
 - **Services**: validação semântica e repositório de blueprints.
-codex/verify-the-structure-59nncd
+codex/verify-the-structure-m2jj1r
 - **Persistence**: SQLAlchemy ORM com tabelas `blueprints` e `jobs`.
 - **Orchestration**: fila simples in-process para execução assíncrona com retry e timeout.
+- **Hypervisor Adapter**: interface + adapter Proxmox-first integrado ao runner de jobs.
 main
 
 ## Estrutura
@@ -20,7 +23,7 @@ main
 - `backend/app/api/`: endpoints HTTP.
 - `backend/app/schemas/`: contratos de dados.
 - `backend/app/services/`: regras de negócio e acesso a dados.
-codex/verify-the-structure-59nncd
+codex/verify-the-structure-m2jj1r
 - `backend/app/models/`: modelos ORM de blueprint e job.
 - `backend/app/db/`: base ORM e sessão de banco.
 main
@@ -29,7 +32,7 @@ main
 ## Fluxo de validação e ciclo de blueprint
 
 1. Cliente envia `POST /blueprints/validate` para validação semântica sem persistência.
-codex/verify-the-structure-59nncd
+codex/verify-the-structure-m2jj1r
 2. Cliente envia `POST /blueprints` para criar blueprint válido no banco.
 main
 3. Cliente consulta blueprints com `GET /blueprints` e `GET /blueprints/{id}`.
@@ -43,14 +46,14 @@ main
 - CIDR de rede deve ser válido quando informado.
 - Cada nó deve referenciar ao menos uma rede e sem duplicações.
 
-codex/verify-the-structure-59nncd
+codex/verify-the-structure-m2jj1r
 main
 ## Persistência e migração
 
 - Banco configurado por `DATABASE_URL` (default local: SQLite).
 - Compose de desenvolvimento inclui PostgreSQL.
 - Migração inicial SQL em `backend/migrations/0001_create_blueprints.sql`.
-codex/verify-the-structure-59nncd
+codex/verify-the-structure-m2jj1r
 main
 
 ## Execução local
@@ -58,7 +61,8 @@ main
 - App: `uvicorn app.main:app --host 0.0.0.0 --port 8000` (em `backend/`).
 - Testes: `pytest` (em `backend/`).
 - Docker Compose: `docker compose -f deploy/docker-compose.yml up --build`.
-codex/verify-the-structure-59nncd
+codex/verify-the-structure-m2jj1r
+main
 
 
 ## Fluxo de jobs
@@ -67,4 +71,13 @@ codex/verify-the-structure-59nncd
 2. API cria job em `pending` e enfileira execução assíncrona.
 3. Runner atualiza status (`running` -> `succeeded`/`failed`) com política de retry e timeout.
 4. Cliente consulta progresso via `GET /jobs` e `GET /jobs/{id}`.
+codex/verify-the-structure-m2jj1r
+
+
+## Fluxo de execução com adapter
+
+1. Job runner valida ação e blueprint alvo (quando informado).
+2. Factory resolve adapter pelo `HYPERVISOR_PROVIDER` (default: `proxmox`).
+3. Runner despacha para `provision`, `snapshot` ou `reset` no adapter.
+4. Status do job é atualizado com retry/timeout em caso de falha.
 main
