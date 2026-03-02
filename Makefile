@@ -1,8 +1,10 @@
-codex/verify-the-structure-m8z187
+codex/verify-the-structure-59nncd
+main
 .PHONY: backend-setup backend-run backend-test backend-compile backend-ci backend-migrate-sql
 
 backend-setup:
 	cd backend && python -m venv .venv && . .venv/bin/activate && pip install '.[dev]'
+codex/verify-the-structure-59nncd
 main
 
 backend-run:
@@ -15,9 +17,11 @@ backend-compile:
 	python -m compileall backend/app
 
 backend-ci: backend-compile backend-test
-codex/verify-the-structure-m8z187
+codex/verify-the-structure-59nncd
+main
 
 backend-migrate-sql:
 	@echo "Apply SQL files in backend/migrations with your DB client (psql)."
 	@ls -1 backend/migrations/*.sql
+codex/verify-the-structure-59nncd
 main

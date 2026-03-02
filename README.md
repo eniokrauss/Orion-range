@@ -84,7 +84,7 @@ It is not designed for offensive use outside authorized and legal environments.
 
 ---
 
-codex/verify-the-structure-m8z187
+codex/verify-the-structure-59nncd
 main
 ## Development Execution Order
 
@@ -102,7 +102,7 @@ To deliver the project in full, execution follows `ROADMAP.md` in this order:
 
 ---
 
-codex/verify-the-structure-m8z187
+codex/verify-the-structure-59nncd
 main
 ## Roadmap
 
@@ -131,9 +131,16 @@ pip install -e .[dev]
 uvicorn app.main:app --reload
 ```
 
-codex/verify-the-structure-m8z187
+codex/verify-the-structure-59nncd
 > Optional: configure `DATABASE_URL` (default uses local SQLite).
 
+
+
+### Job orchestration API (current stage)
+
+- `POST /jobs` create asynchronous job (`provision`, `snapshot`, `reset`)
+- `GET /jobs` list submitted jobs
+- `GET /jobs/{id}` get job status
 
 main
 ### Running tests
@@ -149,7 +156,7 @@ pytest
 docker compose -f deploy/docker-compose.yml up --build
 ```
 
-codex/verify-the-structure-m8z187
+codex/verify-the-structure-59nncd
 Compose starts `orion-api` and `postgres` for development persistence.
 
 main

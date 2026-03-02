@@ -1,5 +1,6 @@
 services:
-codex/verify-the-structure-m8z187
+codex/verify-the-structure-59nncd
+main
   postgres:
     image: postgres:16-alpine
     environment:
@@ -12,6 +13,7 @@ codex/verify-the-structure-m8z187
       - orion-postgres-data:/var/lib/postgresql/data
     restart: unless-stopped
 
+codex/verify-the-structure-59nncd
 main
   orion-api:
     build:
@@ -19,7 +21,8 @@ main
       dockerfile: backend/Dockerfile
     env_file:
       - ./env.example
-codex/verify-the-structure-m8z187
+codex/verify-the-structure-59nncd
+main
     depends_on:
       - postgres
     ports:
@@ -28,4 +31,5 @@ codex/verify-the-structure-m8z187
 
 volumes:
   orion-postgres-data:
+codex/verify-the-structure-59nncd
 main
