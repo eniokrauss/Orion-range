@@ -20,7 +20,7 @@ def _wait_until_done(run_id: str, timeout_seconds: float = 3.0):
     deadline = time.time() + timeout_seconds
     while time.time() < deadline:
         r = client.get(f"/scenarios/runs/{run_id}")
-        if r.status_code == 200 and r.json()["status"] in {"completed", "stopped"}:
+        if r.status_code == 200 and r.json()["status"] in {"completed", "stopped", "failed"}:
             return r.json()
         time.sleep(0.1)
     return client.get(f"/scenarios/runs/{run_id}").json()
@@ -64,3 +64,40 @@ def test_stop_scenario_run():
 
     final = _wait_until_done(run_id)
     assert final["status"] in {"stopped", "completed"}
+
+
+def test_mitre_technique_step_resolves_to_action():
+    response = client.post(
+        "/scenarios/runs",
+        json={
+            "scenario_name": "mitre-attack",
+            "steps": [
+                {"name": "simulate-phishing", "action": "mitre:T1566", "delay_ms": 1},
+            ],
+        },
+    )
+    assert response.status_code == 200
+    run_id = response.json()["id"]
+
+    final = _wait_until_done(run_id)
+    assert final["status"] == "completed"
+    assert final["timeline"][0]["action"] == "inject-phishing-email"
+    assert final["timeline"][0]["mitre"]["technique_id"] == "T1566"
+
+
+def test_unknown_mitre_technique_fails_run():
+    response = client.post(
+        "/scenarios/runs",
+        json={
+            "scenario_name": "mitre-attack",
+            "steps": [
+                {"name": "unknown-technique", "action": "mitre:T0000", "delay_ms": 1},
+            ],
+        },
+    )
+    assert response.status_code == 200
+    run_id = response.json()["id"]
+
+    final = _wait_until_done(run_id)
+    assert final["status"] == "failed"
+    assert "Unknown MITRE technique" in final["timeline"][0]["error"]
