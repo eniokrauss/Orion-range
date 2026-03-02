@@ -84,6 +84,22 @@ It is not designed for offensive use outside authorized and legal environments.
 
 ---
 
+## Development Execution Order
+
+To deliver the project in full, execution follows `ROADMAP.md` in this order:
+
+1. Foundation and delivery reliability
+2. Blueprint contract hardening
+3. Persistence layer
+4. Job orchestration
+5. Hypervisor adapter (Proxmox-first)
+6. Baseline snapshot and deterministic reset
+7. Scenario simulation engine
+8. MITRE ATT&CK plugin support
+9. Production hardening
+
+---
+
 ## Roadmap
 
 Planned milestones:
@@ -101,7 +117,65 @@ Planned milestones:
 
 > ⚠ Orion Range is currently under active development.
 
-Instructions will be provided as the core stabilizes.
+### Backend local run
+
+```bash
+cd backend
+python -m venv .venv
+source .venv/bin/activate
+pip install -e .[dev]
+uvicorn app.main:app --reload
+```
+
+> Optional: configure `DATABASE_URL` (default uses local SQLite) and `HYPERVISOR_PROVIDER` (default: `proxmox`).
+
+
+
+
+### Blueprint API (contract hardening)
+
+- `POST /blueprints/validate` validates semantic rules without persisting
+- `POST /blueprints`, `GET /blueprints`, `GET /blueprints/{id}`, `DELETE /blueprints/{id}`
+- Blueprint payload now includes `schema_version` (current supported: `1.0`)
+- Validation/domain errors follow machine-consumable shape:
+
+```json
+{
+  "detail": {
+    "code": "ERROR_CODE",
+    "message": "human readable message"
+  }
+}
+```
+
+### Job orchestration API (current stage)
+
+- `POST /jobs` create asynchronous job (`provision`, `snapshot`, `reset`)
+- `snapshot` now establishes a baseline and `reset` requires this baseline
+- `GET /jobs` list submitted jobs
+- `GET /jobs/{id}` get job status
+
+### Scenario API (current stage)
+
+- `POST /scenarios/runs` start scenario run
+- `GET /scenarios/runs` list runs
+- `GET /scenarios/runs/{id}` get run status/timeline
+- `POST /scenarios/runs/{id}/stop` request stop
+
+### Running tests
+
+```bash
+cd backend
+pytest
+```
+
+### Docker Compose
+
+```bash
+docker compose -f deploy/docker-compose.yml up --build
+```
+
+Compose starts `orion-api` and `postgres` for development persistence.
 
 ---
 
