@@ -1,7 +1,9 @@
 from fastapi import APIRouter, HTTPException
 
 from app.schemas.blueprint import LabBlueprint
+codex/verify-the-structure-59nncd
 from app.services.blueprint_repository import BlueprintNotFoundError, blueprint_repository
+main
 from app.services.blueprint_validator import BlueprintError, validate_blueprint
 
 router = APIRouter(prefix="/blueprints")
@@ -21,6 +23,8 @@ def validate_blueprint_route(blueprint: LabBlueprint):
         "nodes": len(blueprint.nodes),
         "networks": len(blueprint.networks),
     }
+codex/verify-the-structure-59nncd
+main
 
 
 @router.post("")
@@ -30,6 +34,8 @@ def create_blueprint(blueprint: LabBlueprint):
     except BlueprintError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
+codex/verify-the-structure-59nncd
+main
     stored = blueprint_repository.create(blueprint)
     payload = stored.payload
     return {
@@ -38,11 +44,15 @@ def create_blueprint(blueprint: LabBlueprint):
         "version": stored.version,
         "nodes": len(payload.get("nodes", [])),
         "networks": len(payload.get("networks", [])),
+codex/verify-the-structure-59nncd
+main
     }
 
 
 @router.get("")
 def list_blueprints():
+codex/verify-the-structure-59nncd
+main
     items = blueprint_repository.list()
     return [
         {
@@ -51,6 +61,8 @@ def list_blueprints():
             "version": item.version,
             "nodes": len(item.payload.get("nodes", [])),
             "networks": len(item.payload.get("networks", [])),
+codex/verify-the-structure-59nncd
+main
         }
         for item in items
     ]
@@ -59,20 +71,28 @@ def list_blueprints():
 @router.get("/{blueprint_id}")
 def get_blueprint(blueprint_id: str):
     try:
+codex/verify-the-structure-59nncd
         item = blueprint_repository.get(blueprint_id)
+main
     except BlueprintNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
 
     return {
+codex/verify-the-structure-59nncd
         "id": item.id,
         "blueprint": item.payload,
+main
     }
 
 
 @router.delete("/{blueprint_id}", status_code=204)
 def delete_blueprint(blueprint_id: str):
     try:
+codex/verify-the-structure-59nncd
+main
         blueprint_repository.delete(blueprint_id)
     except BlueprintNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
     return None
+codex/verify-the-structure-59nncd
+main

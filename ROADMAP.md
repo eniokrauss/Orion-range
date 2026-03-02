@@ -13,6 +13,7 @@
 - [ ] Standardize API error codes for machine-consumable clients.
 
 ## Etapa 2 — Persistence layer
+codex/verify-the-structure-59nncd
 - [x] Add PostgreSQL service to compose stack.
 - [x] Introduce ORM models and migrations.
 - [x] Add CRUD endpoints for blueprint lifecycle.
@@ -21,6 +22,7 @@
 - [x] Implement async job model (`pending/running/succeeded/failed`).
 - [x] Add job submission/status endpoints.
 - [x] Create worker execution loop with retry and timeout strategy.
+main
 
 ## Etapa 4 — Hypervisor adapter (Proxmox-first)
 - [ ] Define hypervisor adapter interface.
