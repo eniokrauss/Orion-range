@@ -28,15 +28,14 @@
 - [x] Integrate adapter calls with job orchestrator.
 
 ## Etapa 5 — Baseline snapshot and deterministic reset
-
 - [x] Baseline snapshot creation job.
 - [x] Reset-to-baseline job.
 - [x] Validation tests for repeatability and rollback behavior.
 
 ## Etapa 6 — Scenario simulation engine
-- [ ] Scenario schema (injects, timeline, preconditions).
-- [ ] Scenario executor and event tracking.
-- [ ] API endpoints for scenario start/stop/status.
+- [x] Scenario schema (injects, timeline, preconditions).
+- [x] Scenario executor and event tracking.
+- [x] API endpoints for scenario start/stop/status.
 
 ## Etapa 7 — MITRE ATT&CK plugin support
 - [ ] Plugin interface for techniques.

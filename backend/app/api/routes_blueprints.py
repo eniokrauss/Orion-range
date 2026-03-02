@@ -1,9 +1,7 @@
 from fastapi import APIRouter, HTTPException
 
 from app.schemas.blueprint import LabBlueprint
-
 from app.services.blueprint_repository import BlueprintNotFoundError, blueprint_repository
-
 from app.services.blueprint_validator import BlueprintError, validate_blueprint
 
 router = APIRouter(prefix="/blueprints")
@@ -45,7 +43,6 @@ def create_blueprint(blueprint: LabBlueprint):
 
 @router.get("")
 def list_blueprints():
-
     items = blueprint_repository.list()
     return [
         {
@@ -54,7 +51,6 @@ def list_blueprints():
             "version": item.version,
             "nodes": len(item.payload.get("nodes", [])),
             "networks": len(item.payload.get("networks", [])),
-
         }
         for item in items
     ]
@@ -63,27 +59,20 @@ def list_blueprints():
 @router.get("/{blueprint_id}")
 def get_blueprint(blueprint_id: str):
     try:
-
         item = blueprint_repository.get(blueprint_id)
-
     except BlueprintNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
 
     return {
-
         "id": item.id,
         "blueprint": item.payload,
-
     }
 
 
 @router.delete("/{blueprint_id}", status_code=204)
 def delete_blueprint(blueprint_id: str):
     try:
-
-
         blueprint_repository.delete(blueprint_id)
     except BlueprintNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
     return None
-

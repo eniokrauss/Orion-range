@@ -127,9 +127,23 @@ pip install -e .[dev]
 uvicorn app.main:app --reload
 ```
 
+> Optional: configure `DATABASE_URL` (default uses local SQLite) and `HYPERVISOR_PROVIDER` (default: `proxmox`).
+
+
+
 ### Job orchestration API (current stage)
 
 - `POST /jobs` create asynchronous job (`provision`, `snapshot`, `reset`)
+- `snapshot` now establishes a baseline and `reset` requires this baseline
+- `GET /jobs` list submitted jobs
+- `GET /jobs/{id}` get job status
+
+### Scenario API (current stage)
+
+- `POST /scenarios/runs` start scenario run
+- `GET /scenarios/runs` list runs
+- `GET /scenarios/runs/{id}` get run status/timeline
+- `POST /scenarios/runs/{id}/stop` request stop
 
 ### Running tests
 
@@ -143,6 +157,8 @@ pytest
 ```bash
 docker compose -f deploy/docker-compose.yml up --build
 ```
+
+Compose starts `orion-api` and `postgres` for development persistence.
 
 ---
 

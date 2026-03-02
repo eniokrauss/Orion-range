@@ -1,4 +1,4 @@
-# Orion Range Core Architecture (Fase 5)
+# Orion Range Core Architecture (Fase 6)
 
 ## Visão Geral
 
@@ -10,6 +10,7 @@ A fase atual entrega backend FastAPI com validação semântica, persistência d
 - **Persistence**: SQLAlchemy ORM com tabelas `blueprints`, `jobs` e `baselines`.
 - **Orchestration**: fila simples in-process para execução assíncrona com retry e timeout.
 - **Hypervisor Adapter**: interface + adapter Proxmox-first integrado ao runner de jobs.
+- **Scenario Engine**: execução assíncrona de cenários com timeline e controle start/stop/status.
 
 ## Estrutura
 
@@ -70,3 +71,11 @@ A fase atual entrega backend FastAPI com validação semântica, persistência d
 1. `POST /jobs` com ação `snapshot` cria/atualiza baseline do blueprint.
 2. `POST /jobs` com ação `reset` exige baseline prévio e incrementa contador de reset.
 3. Repetição de reset no mesmo baseline mantém execução determinística do fluxo.
+
+
+## Fluxo de cenários
+
+1. Cliente envia `POST /scenarios/runs` com nome do cenário e passos (timeline).
+2. Runner assíncrono processa passos e atualiza status (`pending`/`running`/`completed`/`stopped`).
+3. Cliente consulta via `GET /scenarios/runs` e `GET /scenarios/runs/{id}`.
+4. Cliente pode interromper com `POST /scenarios/runs/{id}/stop`.

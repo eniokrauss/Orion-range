@@ -17,4 +17,3 @@ backend-ci: backend-compile backend-test
 backend-migrate-sql:
 	@echo "Apply SQL files in backend/migrations with your DB client (psql)."
 	@ls -1 backend/migrations/*.sql
-
