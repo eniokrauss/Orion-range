@@ -12,6 +12,7 @@ from app.models.baseline import BaselineRecord  # noqa: F401
 from app.models.blueprint import BlueprintRecord  # noqa: F401
 from app.models.job import JobRecord  # noqa: F401
 
+
 setup_logging()
 
 app = FastAPI(
@@ -19,7 +20,6 @@ app = FastAPI(
     version=settings.app_version,
     description=settings.app_description,
 )
-
 
 @app.on_event("startup")
 def create_tables() -> None:

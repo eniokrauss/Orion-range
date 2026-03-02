@@ -28,6 +28,7 @@
 - [x] Integrate adapter calls with job orchestrator.
 
 ## Etapa 5 — Baseline snapshot and deterministic reset
+
 - [x] Baseline snapshot creation job.
 - [x] Reset-to-baseline job.
 - [x] Validation tests for repeatability and rollback behavior.
