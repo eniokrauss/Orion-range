@@ -17,6 +17,7 @@ def clean_blueprint_repository():
 def _valid_payload():
     return {
         "name": "sample-lab",
+        "schema_version": "1.0",
         "version": "0.1.0",
         "networks": [{"name": "corp-net", "cidr": "10.10.10.0/24"}],
         "nodes": [{"name": "dc01", "role": "domain-controller", "networks": ["corp-net"]}],
@@ -30,6 +31,7 @@ def test_validate_blueprint_success_response_shape():
     assert body == {
         "valid": True,
         "name": "sample-lab",
+        "schema_version": "1.0",
         "version": "0.1.0",
         "nodes": 1,
         "networks": 1,
@@ -45,6 +47,7 @@ def test_blueprint_crud_lifecycle():
     assert list_response.status_code == 200
     assert len(list_response.json()) == 1
     assert list_response.json()[0]["id"] == blueprint_id
+    assert list_response.json()[0]["schema_version"] == "1.0"
 
     get_response = client.get(f"/blueprints/{blueprint_id}")
     assert get_response.status_code == 200
@@ -55,6 +58,7 @@ def test_blueprint_crud_lifecycle():
 
     missing_response = client.get(f"/blueprints/{blueprint_id}")
     assert missing_response.status_code == 404
+    assert missing_response.json()["detail"]["code"] == "NOT_FOUND"
 
 
 def test_validate_blueprint_unknown_network_returns_400():
@@ -66,7 +70,7 @@ def test_validate_blueprint_unknown_network_returns_400():
 
     response = client.post("/blueprints/validate", json=payload)
     assert response.status_code == 400
-    assert "unknown networks" in response.json()["detail"]
+    assert response.json()["detail"]["code"] == "UNKNOWN_NETWORK_REFERENCE"
 
 
 def test_validate_blueprint_invalid_cidr():
@@ -78,7 +82,7 @@ def test_validate_blueprint_invalid_cidr():
 
     response = client.post("/blueprints/validate", json=payload)
     assert response.status_code == 400
-    assert "invalid CIDR" in response.json()["detail"]
+    assert response.json()["detail"]["code"] == "INVALID_CIDR"
 
 
 def test_validate_blueprint_node_without_network():
@@ -90,4 +94,13 @@ def test_validate_blueprint_node_without_network():
 
     response = client.post("/blueprints/validate", json=payload)
     assert response.status_code == 400
-    assert "must reference at least one network" in response.json()["detail"]
+    assert response.json()["detail"]["code"] == "NODE_WITHOUT_NETWORK"
+
+
+def test_validate_blueprint_schema_version_not_supported():
+    payload = _valid_payload()
+    payload["schema_version"] = "2.0"
+
+    response = client.post("/blueprints/validate", json=payload)
+    assert response.status_code == 400
+    assert response.json()["detail"]["code"] == "UNSUPPORTED_BLUEPRINT_SCHEMA"

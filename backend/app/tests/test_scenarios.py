@@ -101,3 +101,9 @@ def test_unknown_mitre_technique_fails_run():
     final = _wait_until_done(run_id)
     assert final["status"] == "failed"
     assert "Unknown MITRE technique" in final["timeline"][0]["error"]
+
+
+def test_get_missing_run_returns_standard_error_shape():
+    response = client.get("/scenarios/runs/missing-run")
+    assert response.status_code == 404
+    assert response.json()["detail"]["code"] == "NOT_FOUND"

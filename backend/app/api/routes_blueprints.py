@@ -1,5 +1,6 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 
+from app.core.errors import ErrorCode, http_error
 from app.schemas.blueprint import LabBlueprint
 from app.services.blueprint_repository import BlueprintNotFoundError, blueprint_repository
 from app.services.blueprint_validator import BlueprintError, validate_blueprint
@@ -12,11 +13,12 @@ def validate_blueprint_route(blueprint: LabBlueprint):
     try:
         validate_blueprint(blueprint)
     except BlueprintError as exc:
-        raise HTTPException(status_code=400, detail=str(exc)) from exc
+        raise http_error(status_code=400, code=exc.code, message=exc.message) from exc
 
     return {
         "valid": True,
         "name": blueprint.name,
+        "schema_version": blueprint.schema_version,
         "version": blueprint.version,
         "nodes": len(blueprint.nodes),
         "networks": len(blueprint.networks),
@@ -28,13 +30,14 @@ def create_blueprint(blueprint: LabBlueprint):
     try:
         validate_blueprint(blueprint)
     except BlueprintError as exc:
-        raise HTTPException(status_code=400, detail=str(exc)) from exc
+        raise http_error(status_code=400, code=exc.code, message=exc.message) from exc
 
     stored = blueprint_repository.create(blueprint)
     payload = stored.payload
     return {
         "id": stored.id,
         "name": stored.name,
+        "schema_version": payload.get("schema_version"),
         "version": stored.version,
         "nodes": len(payload.get("nodes", [])),
         "networks": len(payload.get("networks", [])),
@@ -48,6 +51,7 @@ def list_blueprints():
         {
             "id": item.id,
             "name": item.name,
+            "schema_version": item.payload.get("schema_version"),
             "version": item.version,
             "nodes": len(item.payload.get("nodes", [])),
             "networks": len(item.payload.get("networks", [])),
@@ -61,7 +65,7 @@ def get_blueprint(blueprint_id: str):
     try:
         item = blueprint_repository.get(blueprint_id)
     except BlueprintNotFoundError as exc:
-        raise HTTPException(status_code=404, detail=str(exc)) from exc
+        raise http_error(status_code=404, code=ErrorCode.NOT_FOUND, message=str(exc)) from exc
 
     return {
         "id": item.id,
@@ -74,5 +78,5 @@ def delete_blueprint(blueprint_id: str):
     try:
         blueprint_repository.delete(blueprint_id)
     except BlueprintNotFoundError as exc:
-        raise HTTPException(status_code=404, detail=str(exc)) from exc
+        raise http_error(status_code=404, code=ErrorCode.NOT_FOUND, message=str(exc)) from exc
     return None

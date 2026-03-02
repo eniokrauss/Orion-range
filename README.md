@@ -131,6 +131,23 @@ uvicorn app.main:app --reload
 
 
 
+
+### Blueprint API (contract hardening)
+
+- `POST /blueprints/validate` validates semantic rules without persisting
+- `POST /blueprints`, `GET /blueprints`, `GET /blueprints/{id}`, `DELETE /blueprints/{id}`
+- Blueprint payload now includes `schema_version` (current supported: `1.0`)
+- Validation/domain errors follow machine-consumable shape:
+
+```json
+{
+  "detail": {
+    "code": "ERROR_CODE",
+    "message": "human readable message"
+  }
+}
+```
+
 ### Job orchestration API (current stage)
 
 - `POST /jobs` create asynchronous job (`provision`, `snapshot`, `reset`)

@@ -9,8 +9,8 @@
 
 ## Etapa 1 — Blueprint contract hardening
 - [x] Semantic validation service for duplicate names, unknown networks, CIDR parsing, and node-network requirements.
-- [ ] Add schema versioning field and migration notes.
-- [ ] Standardize API error codes for machine-consumable clients.
+- [x] Add schema versioning field and migration notes.
+- [x] Standardize API error codes for machine-consumable clients.
 
 ## Etapa 2 — Persistence layer
 - [x] Add PostgreSQL service to compose stack.

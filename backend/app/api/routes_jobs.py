@@ -1,5 +1,6 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 
+from app.core.errors import ErrorCode, http_error
 from app.schemas.job import CreateJobRequest
 from app.services.job_repository import JobNotFoundError, job_repository
 from app.services.job_runner import enqueue_job
@@ -49,7 +50,7 @@ def get_job(job_id: str):
     try:
         job = job_repository.get(job_id)
     except JobNotFoundError as exc:
-        raise HTTPException(status_code=404, detail=str(exc)) from exc
+        raise http_error(status_code=404, code=ErrorCode.NOT_FOUND, message=str(exc)) from exc
 
     return {
         "id": job.id,

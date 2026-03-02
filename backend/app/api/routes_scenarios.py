@@ -1,5 +1,6 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 
+from app.core.errors import ErrorCode, http_error
 from app.schemas.scenario import ScenarioStartRequest
 from app.services.scenario_repository import ScenarioRunNotFoundError, scenario_repository
 from app.services.scenario_runner import start_scenario, stop_scenario
@@ -38,7 +39,7 @@ def get_scenario_run(run_id: str):
     try:
         run = scenario_repository.get(run_id)
     except ScenarioRunNotFoundError as exc:
-        raise HTTPException(status_code=404, detail=str(exc)) from exc
+        raise http_error(status_code=404, code=ErrorCode.NOT_FOUND, message=str(exc)) from exc
 
     return {
         "id": run.id,
@@ -53,7 +54,7 @@ def stop_scenario_run(run_id: str):
     try:
         scenario_repository.get(run_id)
     except ScenarioRunNotFoundError as exc:
-        raise HTTPException(status_code=404, detail=str(exc)) from exc
+        raise http_error(status_code=404, code=ErrorCode.NOT_FOUND, message=str(exc)) from exc
 
     stop_scenario(run_id)
     return {"id": run_id, "status": "stopping"}

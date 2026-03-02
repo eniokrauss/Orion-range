@@ -125,3 +125,9 @@ def test_create_job_with_missing_blueprint_fails():
     final_job = _wait_for_terminal_status(job_id)
     assert final_job["status"] == "failed"
     assert "was not found" in final_job["last_error"]
+
+
+def test_get_missing_job_returns_standard_error_shape():
+    response = client.get("/jobs/missing-job")
+    assert response.status_code == 404
+    assert response.json()["detail"]["code"] == "NOT_FOUND"

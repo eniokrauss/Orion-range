@@ -23,6 +23,7 @@ class NodeBP(BaseModel):
 
 class LabBlueprint(BaseModel):
     name: str = Field(min_length=1)
+    schema_version: str = "1.0"
     version: str = "0.1.0"
     networks: List[NetworkBP] = Field(default_factory=list)
     nodes: List[NodeBP] = Field(default_factory=list)
