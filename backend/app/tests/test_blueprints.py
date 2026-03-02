@@ -1,45 +1,31 @@
-codex/verify-the-structure-m2jj1r
-main
 import pytest
 from fastapi.testclient import TestClient
 
 from app.main import app
-codex/verify-the-structure-m2jj1r
 from app.services.blueprint_repository import blueprint_repository
-main
 
 client = TestClient(app)
 
 
-codex/verify-the-structure-m2jj1r
-main
 @pytest.fixture(autouse=True)
 def clean_blueprint_repository():
     blueprint_repository.clear_all()
     yield
     blueprint_repository.clear_all()
-codex/verify-the-structure-m2jj1r
-main
 
 
 def _valid_payload():
     return {
         "name": "sample-lab",
         "version": "0.1.0",
-codex/verify-the-structure-m2jj1r
-main
         "networks": [{"name": "corp-net", "cidr": "10.10.10.0/24"}],
         "nodes": [{"name": "dc01", "role": "domain-controller", "networks": ["corp-net"]}],
     }
 
-codex/verify-the-structure-m2jj1r
-main
 
 def test_validate_blueprint_success_response_shape():
     response = client.post("/blueprints/validate", json=_valid_payload())
     assert response.status_code == 200
-codex/verify-the-structure-m2jj1r
-main
     body = response.json()
     assert body == {
         "valid": True,
@@ -50,8 +36,6 @@ main
     }
 
 
-codex/verify-the-structure-m2jj1r
-main
 def test_blueprint_crud_lifecycle():
     create_response = client.post("/blueprints", json=_valid_payload())
     assert create_response.status_code == 200
@@ -74,8 +58,6 @@ def test_blueprint_crud_lifecycle():
 
 
 def test_validate_blueprint_unknown_network_returns_400():
-codex/verify-the-structure-m2jj1r
-main
     payload = {
         "name": "invalid-lab",
         "networks": [{"name": "corp-net"}],
@@ -85,8 +67,6 @@ main
     response = client.post("/blueprints/validate", json=payload)
     assert response.status_code == 400
     assert "unknown networks" in response.json()["detail"]
-codex/verify-the-structure-m2jj1r
-main
 
 
 def test_validate_blueprint_invalid_cidr():
@@ -111,5 +91,3 @@ def test_validate_blueprint_node_without_network():
     response = client.post("/blueprints/validate", json=payload)
     assert response.status_code == 400
     assert "must reference at least one network" in response.json()["detail"]
-codex/verify-the-structure-m2jj1r
-main

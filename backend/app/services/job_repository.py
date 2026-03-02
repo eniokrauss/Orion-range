@@ -46,12 +46,10 @@ class JobRepository:
             session.refresh(record)
             return record
 
-codex/verify-the-structure-m2jj1r
     def clear_all(self) -> None:
         with SessionLocal() as session:
             session.query(JobRecord).delete()
             session.commit()
 
-main
 
 job_repository = JobRepository()

@@ -10,10 +10,10 @@ class Settings(BaseSettings):
     app_description: str = "Open-source Cyber Range Orchestrator (Core)"
     orion_env: str = Field(default="dev", description="Runtime environment")
     log_level: str = Field(default="INFO", description="Application log level")
-codex/verify-the-structure-m2jj1r
+
     database_url: str = Field(default="sqlite:///./orion.db", description="Database connection URL")
     hypervisor_provider: str = Field(default="proxmox", description="Hypervisor adapter provider")
-main
+
 
 
 settings = Settings()

@@ -24,10 +24,6 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install backend dependencies
-codex/verify-the-structure-m2jj1r
-        run: python -m pip install --upgrade pip && pip install '.[dev]'
-=======
-main
       - name: Compile check
         run: python -m compileall app
       - name: Run tests

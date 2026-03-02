@@ -28,9 +28,10 @@
 - [x] Integrate adapter calls with job orchestrator.
 
 ## Etapa 5 — Baseline snapshot and deterministic reset
-- [ ] Baseline snapshot creation job.
-- [ ] Reset-to-baseline job.
-- [ ] Validation tests for repeatability and rollback behavior.
+
+- [x] Baseline snapshot creation job.
+- [x] Reset-to-baseline job.
+- [x] Validation tests for repeatability and rollback behavior.
 
 ## Etapa 6 — Scenario simulation engine
 - [ ] Scenario schema (injects, timeline, preconditions).
