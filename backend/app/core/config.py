@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     log_level: str = Field(default="INFO", description="Application log level")
     database_url: str = Field(default="sqlite:///./orion.db", description="Database connection URL")
     hypervisor_provider: str = Field(default="proxmox", description="Hypervisor adapter provider")
+    api_key: str = Field(default="", description="Optional API key for protected endpoints")
 
 
 settings = Settings()

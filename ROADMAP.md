@@ -43,5 +43,6 @@
 
 ## Etapa 8 — Production hardening
 - [ ] AuthN/AuthZ and multi-tenant boundaries.
+  - [x] Initial API key protection for domain endpoints.
 - [ ] Structured observability (metrics/tracing/log correlation).
 - [ ] SLOs, alerts, and operational runbooks.

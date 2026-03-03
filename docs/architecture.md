@@ -48,6 +48,12 @@ Exemplos:
 - `NODE_WITHOUT_NETWORK`
 - `NOT_FOUND`
 
+## Segurança de API (etapa 8 inicial)
+
+- Quando `API_KEY` está configurada, rotas de domínio (`/blueprints`, `/jobs`, `/scenarios`) exigem header `x-api-key`.
+- Rotas de observabilidade/meta (`/health`, `/version`) permanecem públicas para monitoramento.
+- Falhas de autenticação retornam `401` com `detail.code=UNAUTHORIZED`.
+
 ## Persistência e migrações
 
 - Banco configurado por `DATABASE_URL` (default local: SQLite).

@@ -132,12 +132,14 @@ pip install -e .[dev]
 uvicorn app.main:app --reload
 ```
 
-> Optional: configure `DATABASE_URL` (default uses local SQLite) and `HYPERVISOR_PROVIDER` (default: `proxmox`).
+> Optional: configure `DATABASE_URL` (default uses local SQLite), `HYPERVISOR_PROVIDER` (default: `proxmox`) and `API_KEY` to protect domain endpoints.
 
 
 
 
 ### Blueprint API (contract hardening)
+
+If `API_KEY` is configured, send `x-api-key: <value>` for `/blueprints`, `/jobs`, and `/scenarios` endpoints.
 
 - `POST /blueprints/validate` validates semantic rules without persisting
 - `POST /blueprints`, `GET /blueprints`, `GET /blueprints/{id}`, `DELETE /blueprints/{id}`
