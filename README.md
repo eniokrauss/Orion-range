@@ -8,6 +8,9 @@ It enables organizations, universities, and security teams to build, execute, an
 
 ## Overview
 
+<img width="1434" height="790" alt="image" src="https://github.com/user-attachments/assets/d4e4cb57-3c76-4b74-a7e9-68236bcbb797" />
+
+
 Modern security training environments are often built manually, making them difficult to reproduce, scale, or reset consistently.
 
 Orion Range solves this by introducing:
