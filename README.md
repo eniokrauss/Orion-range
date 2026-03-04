@@ -185,6 +185,14 @@ python3 -m http.server 8080
 
 Then open `http://localhost:8080`. In `network.html`, configure backend URL/API key to orchestrate `GET /mitre/techniques`, `POST/GET /scenarios/runs`, `POST /scenarios/runs/{id}/stop`, `GET/POST /blueprints`, and `GET/POST /jobs`. The topology now reacts to active/failed job+scenario states and shows a live events feed.
 
+### Frontend visual previews (current development snapshot)
+
+> Note: these previews are generated from the current prototype state.
+
+![Console selector preview](browser:/tmp/codex_browser_invocations/37764c7ca5d5c971/artifacts/artifacts/preview-console-selector.png)
+
+![Network console preview](browser:/tmp/codex_browser_invocations/06e122d41d1809b2/artifacts/artifacts/frontend-network-realtime-events.png)
+
 ### Running tests
 
 ```bash
