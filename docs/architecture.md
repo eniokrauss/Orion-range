@@ -4,7 +4,11 @@
 
 A fase atual entrega backend FastAPI com validação semântica, persistência de blueprints, orquestração de jobs e execução de cenários com mapeamento MITRE:
 
+<<<<<<< codex/verify-the-structure-yy5nho
 - **API layer**: rotas de health, version, blueprint validate/CRUD, jobs, scenarios e ops overview.
+=======
+- **API layer**: rotas de health, version, blueprint validate/CRUD, jobs e scenarios.
+>>>>>>> main
 - **Domain schemas**: modelos Pydantic para blueprint, job e scenario.
 - **Services**: validação semântica, repositórios e runners assíncronos.
 - **Persistence**: SQLAlchemy ORM com tabelas `blueprints`, `jobs`, `baselines` e `scenario_runs`.
@@ -85,12 +89,15 @@ Exemplos:
 3. Repetição de reset no mesmo baseline mantém execução determinística do fluxo.
 
 
+<<<<<<< codex/verify-the-structure-yy5nho
 ## Fluxo de visão operacional agregada
 
 1. Cliente consulta `GET /ops/overview`.
 2. API agrega contadores de blueprints/jobs/scenarios, telemetria derivada e eventos recentes.
 3. Frontend usa esse payload para atualizar cards de status e feed operacional sem múltiplas chamadas de composição no cliente.
 
+=======
+>>>>>>> main
 ## Fluxo de descoberta MITRE
 
 1. Cliente consulta `GET /mitre/techniques`.

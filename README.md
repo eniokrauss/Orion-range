@@ -171,10 +171,13 @@ If `API_KEY` is configured, send `x-api-key: <value>` for `/blueprints`, `/jobs`
 
 ### Frontend concept prototype (White Team)
 
+<<<<<<< codex/verify-the-structure-yy5nho
 ### Ops API (aggregated operational overview)
 
 - `GET /ops/overview` returns consolidated metrics, status counters and recent events for frontend operational consoles
 
+=======
+>>>>>>> main
 A visual concept prototype is available under `frontend/`:
 
 - `frontend/index.html`: console selector (White/Red/Blue Team)
@@ -187,7 +190,11 @@ cd frontend
 python3 -m http.server 8080
 ```
 
+<<<<<<< codex/verify-the-structure-yy5nho
 Then open `http://localhost:8080`. In `network.html`, configure backend URL/API key to orchestrate `GET /mitre/techniques`, `POST/GET /scenarios/runs`, `POST /scenarios/runs/{id}/stop`, `GET/POST /blueprints`, `GET/POST /jobs`, and `GET /ops/overview`. The topology and stats now react to aggregated runtime state and the live events feed merges backend overview events with local actions.
+=======
+Then open `http://localhost:8080`. In `network.html`, configure backend URL/API key to orchestrate `GET /mitre/techniques`, `POST/GET /scenarios/runs`, `POST /scenarios/runs/{id}/stop`, `GET/POST /blueprints`, and `GET/POST /jobs`. The topology now reacts to active/failed job+scenario states and shows a live events feed.
+>>>>>>> main
 
 ### Frontend visual previews (current development snapshot)
 
