@@ -200,3 +200,4 @@ body { margin: 0; font-family: "Segoe UI", Tahoma, sans-serif; color: var(--text
   border-radius: 4px;
 }
 .jobs-actions { display: flex; gap: .4rem; }
+

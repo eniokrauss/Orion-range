@@ -4,21 +4,20 @@ const saveButton = document.getElementById('save-config');
 const refreshMitreButton = document.getElementById('refresh-mitre');
 const refreshRunsButton = document.getElementById('refresh-runs');
 const refreshJobsButton = document.getElementById('refresh-jobs');
+const refreshMitreButton = document.getElementById('refresh-mitre');
+const refreshRunsButton = document.getElementById('refresh-runs');
 const statusText = document.getElementById('mitre-status');
 const mitreList = document.getElementById('mitre-list');
 const activeScenarios = document.getElementById('active-scenarios');
-
 const scenarioNameInput = document.getElementById('scenario-name');
 const scenarioTechniqueSelect = document.getElementById('scenario-technique');
 const startScenarioButton = document.getElementById('start-scenario');
 const scenarioRunsList = document.getElementById('scenario-runs');
-
 const createBlueprintButton = document.getElementById('create-blueprint');
 const jobBlueprintSelect = document.getElementById('job-blueprint');
 const jobActionSelect = document.getElementById('job-action');
 const submitJobButton = document.getElementById('submit-job');
 const jobsList = document.getElementById('jobs-list');
-
 const getConfig = () => ({
   baseUrl: localStorage.getItem('orion.apiBase') || 'http://localhost:8000',
   apiKey: localStorage.getItem('orion.apiKey') || '',
@@ -44,6 +43,8 @@ const saveConfig = () => {
 
 const renderMitreList = (items) => {
   mitreList.innerHTML = '';
+  scenarioTechniqueSelect.innerHTML = '';
+
   scenarioTechniqueSelect.innerHTML = '';
 
   items.forEach((item) => {
