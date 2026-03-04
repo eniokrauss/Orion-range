@@ -8,11 +8,6 @@ It enables organizations, universities, and security teams to build, execute, an
 
 ## Overview
 
-<img width="1434" height="790" alt="image" src="https://github.com/user-attachments/assets/d4e4cb57-3c76-4b74-a7e9-68236bcbb797" />
-
-<img width="1993" height="1883" alt="image" src="https://github.com/user-attachments/assets/67d7e878-1ebb-47ad-88d5-7698dc0a10ef" />
-
-
 Modern security training environments are often built manually, making them difficult to reproduce, scale, or reset consistently.
 
 Orion Range solves this by introducing:
@@ -173,6 +168,22 @@ If `API_KEY` is configured, send `x-api-key: <value>` for `/blueprints`, `/jobs`
 
 - `GET /mitre/techniques` list loaded techniques and mapped actions
 - response includes plugin source, technique id, tactic tags and executable action
+
+### Frontend concept prototype (White Team)
+
+A visual concept prototype is available under `frontend/`:
+
+- `frontend/index.html`: console selector (White/Red/Blue Team)
+- `frontend/network.html`: White Team network operational view
+
+Run locally:
+
+```bash
+cd frontend
+python3 -m http.server 8080
+```
+
+Then open `http://localhost:8080`.
 
 ### Running tests
 

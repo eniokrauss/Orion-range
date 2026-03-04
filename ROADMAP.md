@@ -46,3 +46,9 @@
   - [x] Initial API key protection for domain endpoints.
 - [ ] Structured observability (metrics/tracing/log correlation).
 - [ ] SLOs, alerts, and operational runbooks.
+
+
+## Etapa 9 — Frontend operations console
+- [x] Initial visual concept prototype (console selector + white team network view).
+- [ ] Connect frontend to backend APIs (`/blueprints`, `/jobs`, `/scenarios`, `/mitre/techniques`).
+- [ ] Real-time topology updates and scenario controls.
