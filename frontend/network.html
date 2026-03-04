@@ -23,51 +23,73 @@
       <article><label>CONEXÕES</label><strong>122</strong></article>
       <article><label>ALERTAS</label><strong>1 /min</strong></article>
       <article><label>ANOMALIAS</label><strong>2</strong></article>
-      <article><label>CENÁRIOS</label><strong>0 ativos</strong></article>
+      <article><label>CENÁRIOS</label><strong id="active-scenarios">0 ativos</strong></article>
     </section>
 
-    <main class="network-stage">
-      <svg viewBox="0 0 1200 680" class="topology" xmlns="http://www.w3.org/2000/svg">
-        <g class="links">
-          <line x1="600" y1="130" x2="600" y2="220"/>
-          <line x1="600" y1="220" x2="450" y2="330"/>
-          <line x1="600" y1="220" x2="760" y2="330" class="dmz"/>
-          <line x1="450" y1="330" x2="310" y2="460"/>
-          <line x1="450" y1="330" x2="520" y2="470"/>
-          <line x1="760" y1="330" x2="670" y2="470" class="dmz"/>
-          <line x1="760" y1="330" x2="860" y2="470" class="dmz"/>
-          <line x1="600" y1="130" x2="885" y2="200" class="threat"/>
-        </g>
+    <section class="api-controls panel">
+      <label>Backend API URL
+        <input id="api-base" type="text" placeholder="http://localhost:8000" />
+      </label>
+      <label>API Key (optional)
+        <input id="api-key" type="password" placeholder="x-api-key" />
+      </label>
+      <button id="save-config" class="btn">Salvar configuração</button>
+      <button id="refresh-mitre" class="btn ghost">Atualizar MITRE</button>
+      <span id="mitre-status" class="status-text">Aguardando carregamento…</span>
+    </section>
 
-        <g class="node" transform="translate(600 80)">
-          <circle r="33"/><text y="55">FW-Edge</text>
-        </g>
-        <g class="node" transform="translate(600 220)">
-          <circle r="35"/><text y="55">R1-Core</text>
-        </g>
-        <g class="node" transform="translate(450 330)">
-          <circle r="33"/><text y="55">SW-Core</text>
-        </g>
-        <g class="node" transform="translate(760 330)">
-          <circle r="33"/><text y="55">SW-DMZ</text>
-        </g>
+    <main class="network-layout">
+      <section class="network-stage">
+        <svg viewBox="0 0 1200 680" class="topology" xmlns="http://www.w3.org/2000/svg">
+          <g class="links">
+            <line x1="600" y1="130" x2="600" y2="220"/>
+            <line x1="600" y1="220" x2="450" y2="330"/>
+            <line x1="600" y1="220" x2="760" y2="330" class="dmz"/>
+            <line x1="450" y1="330" x2="310" y2="460"/>
+            <line x1="450" y1="330" x2="520" y2="470"/>
+            <line x1="760" y1="330" x2="670" y2="470" class="dmz"/>
+            <line x1="760" y1="330" x2="860" y2="470" class="dmz"/>
+            <line x1="600" y1="130" x2="885" y2="200" class="threat"/>
+          </g>
 
-        <g class="node service" transform="translate(310 460)">
-          <circle r="31"/><text y="52">SIEM</text>
-        </g>
-        <g class="node service" transform="translate(520 470)">
-          <circle r="31"/><text y="52">IDS</text>
-        </g>
-        <g class="node dmz-node" transform="translate(670 470)">
-          <circle r="31"/><text y="52">SRV-Web</text>
-        </g>
-        <g class="node dmz-node" transform="translate(860 470)">
-          <circle r="31"/><text y="52">SRV-DB</text>
-        </g>
-        <g class="node threat-node" transform="translate(885 200)">
-          <circle r="31"/><text y="52">Kali-Attacker</text>
-        </g>
-      </svg>
+          <g class="node" transform="translate(600 80)">
+            <circle r="33"/><text y="55">FW-Edge</text>
+          </g>
+          <g class="node" transform="translate(600 220)">
+            <circle r="35"/><text y="55">R1-Core</text>
+          </g>
+          <g class="node" transform="translate(450 330)">
+            <circle r="33"/><text y="55">SW-Core</text>
+          </g>
+          <g class="node" transform="translate(760 330)">
+            <circle r="33"/><text y="55">SW-DMZ</text>
+          </g>
+
+          <g class="node service" transform="translate(310 460)">
+            <circle r="31"/><text y="52">SIEM</text>
+          </g>
+          <g class="node service" transform="translate(520 470)">
+            <circle r="31"/><text y="52">IDS</text>
+          </g>
+          <g class="node dmz-node" transform="translate(670 470)">
+            <circle r="31"/><text y="52">SRV-Web</text>
+          </g>
+          <g class="node dmz-node" transform="translate(860 470)">
+            <circle r="31"/><text y="52">SRV-DB</text>
+          </g>
+          <g class="node threat-node" transform="translate(885 200)">
+            <circle r="31"/><text y="52">Kali-Attacker</text>
+          </g>
+        </svg>
+      </section>
+
+      <aside class="panel mitre-panel">
+        <h3>Técnicas MITRE carregadas</h3>
+        <p>Fonte: <code>GET /mitre/techniques</code></p>
+        <ul id="mitre-list"></ul>
+      </aside>
     </main>
+
+    <script src="./network.js"></script>
   </body>
 </html>

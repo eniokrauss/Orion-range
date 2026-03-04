@@ -51,4 +51,5 @@
 ## Etapa 9 — Frontend operations console
 - [x] Initial visual concept prototype (console selector + white team network view).
 - [ ] Connect frontend to backend APIs (`/blueprints`, `/jobs`, `/scenarios`, `/mitre/techniques`).
+  - [x] Initial `GET /mitre/techniques` integration in network console prototype.
 - [ ] Real-time topology updates and scenario controls.
