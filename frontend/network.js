@@ -8,6 +8,15 @@ const statusText = document.getElementById('mitre-status');
 const mitreList = document.getElementById('mitre-list');
 const activeScenarios = document.getElementById('active-scenarios');
 
+<<<<<<< codex/verify-the-structure-yy5nho
+const metricPps = document.getElementById('metric-pps');
+const metricThroughput = document.getElementById('metric-throughput');
+const metricConnections = document.getElementById('metric-connections');
+const metricAlerts = document.getElementById('metric-alerts');
+const metricAnomalies = document.getElementById('metric-anomalies');
+
+=======
+>>>>>>> main
 const scenarioNameInput = document.getElementById('scenario-name');
 const scenarioTechniqueSelect = document.getElementById('scenario-technique');
 const startScenarioButton = document.getElementById('start-scenario');
@@ -24,7 +33,12 @@ const nodeIds = ['node-fw', 'node-core', 'node-sw-core', 'node-sw-dmz', 'node-si
 const linkThreat = document.getElementById('link-threat');
 const linkDmz = document.getElementById('link-dmz');
 
+<<<<<<< codex/verify-the-structure-yy5nho
+let localEvents = [];
+let backendEvents = [];
+=======
 let recentEvents = [];
+>>>>>>> main
 let lastScenarioRuns = [];
 let lastJobs = [];
 
@@ -45,6 +59,18 @@ const setStatus = (message, type = 'info') => {
   statusText.dataset.type = type;
 };
 
+<<<<<<< codex/verify-the-structure-yy5nho
+const renderEvents = () => {
+  const merged = [...localEvents, ...backendEvents]
+    .sort((a, b) => String(b.timestamp).localeCompare(String(a.timestamp)))
+    .slice(0, 12);
+
+  eventsList.innerHTML = '';
+  merged.forEach((event) => {
+    const li = document.createElement('li');
+    li.className = `event-${event.level || 'info'}`;
+    li.innerHTML = `<strong>${event.timestamp}</strong><span>${event.message}</span>`;
+=======
 const addEvent = (message, level = 'info') => {
   recentEvents.unshift({ message, level, at: new Date().toLocaleTimeString() });
   recentEvents = recentEvents.slice(0, 12);
@@ -53,10 +79,20 @@ const addEvent = (message, level = 'info') => {
     const li = document.createElement('li');
     li.className = `event-${level}`;
     li.innerHTML = `<strong>${event.at}</strong><span>${event.message}</span>`;
+>>>>>>> main
     eventsList.appendChild(li);
   });
 };
 
+<<<<<<< codex/verify-the-structure-yy5nho
+const addEvent = (message, level = 'info') => {
+  localEvents.unshift({ message, level, timestamp: new Date().toLocaleTimeString() });
+  localEvents = localEvents.slice(0, 12);
+  renderEvents();
+};
+
+=======
+>>>>>>> main
 const setTopologyState = () => {
   nodeIds.forEach((id) => {
     const node = document.getElementById(id);
@@ -87,6 +123,41 @@ const setTopologyState = () => {
   }
 };
 
+<<<<<<< codex/verify-the-structure-yy5nho
+const applyOverview = (overview) => {
+  const summary = overview.summary || {};
+  const telemetry = overview.telemetry || {};
+
+  metricPps.textContent = `${telemetry.packets_per_sec ?? 0} pps`;
+  metricThroughput.textContent = `${telemetry.throughput_gbps ?? 0} Gbps`;
+  metricConnections.textContent = `${telemetry.connections ?? 0}`;
+  metricAlerts.textContent = `${summary.alerts_per_min ?? 0} /min`;
+  metricAnomalies.textContent = `${summary.anomalies ?? 0}`;
+  activeScenarios.textContent = `${summary.active_scenarios ?? 0} ativos`;
+
+  backendEvents = (overview.recent_events || []).map((event) => ({
+    timestamp: (event.timestamp || '').replace('T', ' ').slice(11, 19) || new Date().toLocaleTimeString(),
+    level: event.level || 'info',
+    message: `${event.source || 'ops'}: ${event.message || ''}`,
+  }));
+
+  renderEvents();
+};
+
+const fetchOpsOverview = async () => {
+  const config = getConfig();
+  try {
+    const response = await fetch(`${config.baseUrl}/ops/overview`, { headers: requestHeaders() });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const overview = await response.json();
+    applyOverview(overview);
+  } catch {
+    // fallback silently; specific fetches still keep screen updated
+  }
+};
+
+=======
+>>>>>>> main
 const saveConfig = () => {
   localStorage.setItem('orion.apiBase', apiBaseInput.value.trim() || 'http://localhost:8000');
   localStorage.setItem('orion.apiKey', apiKeyInput.value.trim());
@@ -134,8 +205,11 @@ const fetchMitreTechniques = async () => {
 const renderScenarioRuns = (runs) => {
   scenarioRunsList.innerHTML = '';
   lastScenarioRuns = runs;
+<<<<<<< codex/verify-the-structure-yy5nho
+=======
   const active = runs.filter((run) => run.status === 'running' || run.status === 'pending').length;
   activeScenarios.textContent = `${active} ativos`;
+>>>>>>> main
 
   runs.slice(0, 8).forEach((run) => {
     const li = document.createElement('li');
@@ -191,6 +265,10 @@ const startScenarioRun = async () => {
     setStatus(`Cenário iniciado: ${run.id.slice(0, 8)}`, 'ok');
     addEvent(`Scenario start: ${run.scenario_name}.`, 'ok');
     await fetchScenarioRuns();
+<<<<<<< codex/verify-the-structure-yy5nho
+    await fetchOpsOverview();
+=======
+>>>>>>> main
   } catch (error) {
     setStatus(`Erro ao iniciar cenário: ${error.message}`, 'error');
     addEvent('Falha ao iniciar cenário.', 'error');
@@ -257,6 +335,10 @@ const createDemoBlueprint = async () => {
     setStatus('Blueprint demo criado.', 'ok');
     addEvent('Blueprint demo criado.', 'ok');
     await fetchBlueprints();
+<<<<<<< codex/verify-the-structure-yy5nho
+    await fetchOpsOverview();
+=======
+>>>>>>> main
   } catch (error) {
     setStatus(`Erro ao criar blueprint: ${error.message}`, 'error');
   }
@@ -303,6 +385,10 @@ const submitJob = async () => {
     setStatus(`Job enviado: ${job.id.slice(0, 8)}`, 'ok');
     addEvent(`Job submitted: ${job.action}.`, 'info');
     await fetchJobs();
+<<<<<<< codex/verify-the-structure-yy5nho
+    await fetchOpsOverview();
+=======
+>>>>>>> main
   } catch (error) {
     setStatus(`Erro ao enviar job: ${error.message}`, 'error');
   }
@@ -318,6 +404,10 @@ const bootstrap = async () => {
   await fetchScenarioRuns();
   await fetchBlueprints();
   await fetchJobs();
+<<<<<<< codex/verify-the-structure-yy5nho
+  await fetchOpsOverview();
+=======
+>>>>>>> main
 };
 
 saveButton.addEventListener('click', async () => {
@@ -326,6 +416,10 @@ saveButton.addEventListener('click', async () => {
   await fetchScenarioRuns();
   await fetchBlueprints();
   await fetchJobs();
+<<<<<<< codex/verify-the-structure-yy5nho
+  await fetchOpsOverview();
+=======
+>>>>>>> main
 });
 
 refreshMitreButton.addEventListener('click', fetchMitreTechniques);
@@ -337,5 +431,9 @@ submitJobButton.addEventListener('click', submitJob);
 
 setInterval(fetchScenarioRuns, 4000);
 setInterval(fetchJobs, 5000);
+<<<<<<< codex/verify-the-structure-yy5nho
+setInterval(fetchOpsOverview, 4500);
+=======
+>>>>>>> main
 
 bootstrap();

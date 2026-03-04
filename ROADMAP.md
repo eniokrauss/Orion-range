@@ -55,4 +55,5 @@
   - [x] Initial scenario controls (`start/list/stop`) from frontend network console.
   - [x] Initial blueprints/jobs controls from frontend network console.
   - [x] Initial dynamic topology state + live events feed from runtime activity.
+  - [x] Initial aggregated ops overview integration (`GET /ops/overview`).
 - [ ] Real-time topology updates and scenario controls.
