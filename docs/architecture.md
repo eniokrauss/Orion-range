@@ -11,7 +11,7 @@ A fase atual entrega backend FastAPI com validação semântica, persistência d
 - **Orchestration**: fila in-process para execução assíncrona com retry e timeout.
 - **Hypervisor Adapter**: interface + adapter Proxmox-first integrado ao runner de jobs.
 - **Scenario Engine**: execução assíncrona de cenários com timeline e controle start/stop/status.
-- **MITRE Plugin Registry**: resolução de ações `mitre:<technique_id>` para ações executáveis.
+- **MITRE Plugin Registry**: resolução de ações `mitre:<technique_id>` para ações executáveis e descoberta de técnicas carregadas via API.
 
 ## Estrutura
 
@@ -83,6 +83,13 @@ Exemplos:
 1. `POST /jobs` com ação `snapshot` cria/atualiza baseline do blueprint.
 2. `POST /jobs` com ação `reset` exige baseline prévio e incrementa contador de reset.
 3. Repetição de reset no mesmo baseline mantém execução determinística do fluxo.
+
+
+## Fluxo de descoberta MITRE
+
+1. Cliente consulta `GET /mitre/techniques`.
+2. API retorna técnicas carregadas por plugin (`plugin`, `technique_id`, `name`, `tactics`, `action`).
+3. Frontend pode usar essa lista para popular construtor de cenários com técnicas suportadas.
 
 ## Fluxo de cenários
 

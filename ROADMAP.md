@@ -38,8 +38,8 @@
 - [x] API endpoints for scenario start/stop/status.
 
 ## Etapa 7 — MITRE ATT&CK plugin support
-- [ ] Plugin interface for techniques.
-- [ ] Technique-to-action mapping and sample technique packages.
+- [x] Plugin interface for techniques.
+- [x] Technique-to-action mapping and sample technique packages.
 
 ## Etapa 8 — Production hardening
 - [ ] AuthN/AuthZ and multi-tenant boundaries.

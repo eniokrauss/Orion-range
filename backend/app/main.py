@@ -3,6 +3,7 @@ from fastapi import Depends, FastAPI
 from app.api.routes_blueprints import router as blueprints_router
 from app.api.routes_health import router as health_router
 from app.api.routes_jobs import router as jobs_router
+from app.api.routes_mitre import router as mitre_router
 from app.api.routes_scenarios import router as scenarios_router
 from app.api.routes_version import router as version_router
 from app.core.auth import require_api_key
@@ -34,3 +35,4 @@ app.include_router(version_router, tags=["meta"])
 app.include_router(blueprints_router, tags=["blueprints"], dependencies=[Depends(require_api_key)])
 app.include_router(jobs_router, tags=["jobs"], dependencies=[Depends(require_api_key)])
 app.include_router(scenarios_router, tags=["scenarios"], dependencies=[Depends(require_api_key)])
+app.include_router(mitre_router, tags=["mitre"], dependencies=[Depends(require_api_key)])

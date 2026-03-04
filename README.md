@@ -169,6 +169,11 @@ If `API_KEY` is configured, send `x-api-key: <value>` for `/blueprints`, `/jobs`
 - `GET /scenarios/runs/{id}` get run status/timeline
 - `POST /scenarios/runs/{id}/stop` request stop
 
+### MITRE API (plugin discovery)
+
+- `GET /mitre/techniques` list loaded techniques and mapped actions
+- response includes plugin source, technique id, tactic tags and executable action
+
 ### Running tests
 
 ```bash
