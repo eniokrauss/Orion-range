@@ -1,12 +1,17 @@
 const apiBaseInput = document.getElementById('api-base');
 const apiKeyInput = document.getElementById('api-key');
 const saveButton = document.getElementById('save-config');
+<<<<<<< codex/verify-the-structure-srus8u
 const refreshMitreButton = document.getElementById('refresh-mitre');
 const refreshRunsButton = document.getElementById('refresh-runs');
+=======
+const refreshButton = document.getElementById('refresh-mitre');
+>>>>>>> main
 const statusText = document.getElementById('mitre-status');
 const mitreList = document.getElementById('mitre-list');
 const activeScenarios = document.getElementById('active-scenarios');
 
+<<<<<<< codex/verify-the-structure-srus8u
 const scenarioNameInput = document.getElementById('scenario-name');
 const scenarioTechniqueSelect = document.getElementById('scenario-technique');
 const startScenarioButton = document.getElementById('start-scenario');
@@ -14,11 +19,14 @@ const scenarioRunsList = document.getElementById('scenario-runs');
 
 let cachedTechniques = [];
 
+=======
+>>>>>>> main
 const getConfig = () => ({
   baseUrl: localStorage.getItem('orion.apiBase') || 'http://localhost:8000',
   apiKey: localStorage.getItem('orion.apiKey') || '',
 });
 
+<<<<<<< codex/verify-the-structure-srus8u
 const requestHeaders = () => {
   const headers = { 'Content-Type': 'application/json' };
   const config = getConfig();
@@ -26,6 +34,8 @@ const requestHeaders = () => {
   return headers;
 };
 
+=======
+>>>>>>> main
 const setStatus = (message, type = 'info') => {
   statusText.textContent = message;
   statusText.dataset.type = type;
@@ -39,8 +49,11 @@ const saveConfig = () => {
 
 const renderMitreList = (items) => {
   mitreList.innerHTML = '';
+<<<<<<< codex/verify-the-structure-srus8u
   scenarioTechniqueSelect.innerHTML = '';
 
+=======
+>>>>>>> main
   items.forEach((item) => {
     const li = document.createElement('li');
     li.innerHTML = `
@@ -48,16 +61,20 @@ const renderMitreList = (items) => {
       <small>${item.tactics.join(', ') || 'no tactics'} · action: ${item.action}</small>
     `;
     mitreList.appendChild(li);
+<<<<<<< codex/verify-the-structure-srus8u
 
     const option = document.createElement('option');
     option.value = item.technique_id;
     option.textContent = `${item.technique_id} — ${item.name}`;
     scenarioTechniqueSelect.appendChild(option);
+=======
+>>>>>>> main
   });
 };
 
 const fetchMitreTechniques = async () => {
   const config = getConfig();
+<<<<<<< codex/verify-the-structure-srus8u
   setStatus('Carregando técnicas MITRE...');
 
   try {
@@ -72,10 +89,34 @@ const fetchMitreTechniques = async () => {
   } catch (error) {
     mitreList.innerHTML = '<li><strong>Falha ao carregar.</strong><small>Verifique URL/API key e backend.</small></li>';
     scenarioTechniqueSelect.innerHTML = '<option value="">Sem técnicas</option>';
+=======
+  const headers = {};
+
+  if (config.apiKey) {
+    headers['x-api-key'] = config.apiKey;
+  }
+
+  setStatus('Carregando técnicas MITRE...');
+
+  try {
+    const response = await fetch(`${config.baseUrl}/mitre/techniques`, { headers });
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    const payload = await response.json();
+    const items = payload.items || [];
+    renderMitreList(items);
+    activeScenarios.textContent = `${Math.max(0, items.length - 3)} ativos`;
+    setStatus(`${items.length} técnicas carregadas.`, 'ok');
+  } catch (error) {
+    mitreList.innerHTML = '<li><strong>Falha ao carregar.</strong><small>Verifique URL/API key e backend.</small></li>';
+>>>>>>> main
     setStatus(`Erro ao carregar MITRE: ${error.message}`, 'error');
   }
 };
 
+<<<<<<< codex/verify-the-structure-srus8u
 const renderScenarioRuns = (runs) => {
   scenarioRunsList.innerHTML = '';
   const active = runs.filter((run) => run.status === 'running' || run.status === 'pending').length;
@@ -180,5 +221,20 @@ refreshRunsButton.addEventListener('click', fetchScenarioRuns);
 startScenarioButton.addEventListener('click', startScenarioRun);
 
 setInterval(fetchScenarioRuns, 4000);
+=======
+const bootstrap = () => {
+  const config = getConfig();
+  apiBaseInput.value = config.baseUrl;
+  apiKeyInput.value = config.apiKey;
+  fetchMitreTechniques();
+};
+
+saveButton.addEventListener('click', () => {
+  saveConfig();
+  fetchMitreTechniques();
+});
+
+refreshButton.addEventListener('click', fetchMitreTechniques);
+>>>>>>> main
 
 bootstrap();

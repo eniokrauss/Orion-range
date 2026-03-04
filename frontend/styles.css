@@ -136,6 +136,7 @@ body { margin: 0; font-family: "Segoe UI", Tahoma, sans-serif; color: var(--text
   .topology { height: 520px; }
   .mitre-panel { max-height: none; }
 }
+<<<<<<< codex/verify-the-structure-srus8u
 
 .side-panel {
   display: grid;
@@ -182,3 +183,5 @@ body { margin: 0; font-family: "Segoe UI", Tahoma, sans-serif; color: var(--text
 }
 .scenario-runs strong { display: block; color: #a8d4ff; }
 .scenario-runs small { color: #8db6df; }
+=======
+>>>>>>> main
