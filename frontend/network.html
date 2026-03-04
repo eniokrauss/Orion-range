@@ -36,6 +36,7 @@
       <button id="save-config" class="btn">Salvar configuração</button>
       <button id="refresh-mitre" class="btn ghost">Atualizar MITRE</button>
       <button id="refresh-runs" class="btn ghost">Atualizar cenários</button>
+      <button id="refresh-jobs" class="btn ghost">Atualizar jobs</button>
       <span id="mitre-status" class="status-text">Aguardando carregamento…</span>
     </section>
 
@@ -101,6 +102,25 @@
           </label>
           <button id="start-scenario" class="btn">Iniciar cenário</button>
           <ul id="scenario-runs" class="scenario-runs"></ul>
+        </section>
+
+        <section class="jobs-panel">
+          <h3>Blueprints & Jobs</h3>
+          <div class="jobs-actions">
+            <button id="create-blueprint" class="btn ghost">Criar blueprint demo</button>
+          </div>
+          <label>Blueprint alvo
+            <select id="job-blueprint"></select>
+          </label>
+          <label>Ação do job
+            <select id="job-action">
+              <option value="provision">provision</option>
+              <option value="snapshot">snapshot</option>
+              <option value="reset">reset</option>
+            </select>
+          </label>
+          <button id="submit-job" class="btn">Enviar job</button>
+          <ul id="jobs-list" class="scenario-runs"></ul>
         </section>
       </aside>
     </main>

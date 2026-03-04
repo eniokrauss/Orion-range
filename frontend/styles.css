@@ -54,7 +54,7 @@ body { margin: 0; font-family: "Segoe UI", Tahoma, sans-serif; color: var(--text
   margin: 0 .8rem .6rem;
   padding: .75rem;
   display: grid;
-  grid-template-columns: 2fr 1fr auto auto 1fr;
+  grid-template-columns: 2fr 1fr auto auto auto 1fr;
   gap: .6rem;
   align-items: end;
 }
@@ -136,7 +136,6 @@ body { margin: 0; font-family: "Segoe UI", Tahoma, sans-serif; color: var(--text
   .topology { height: 520px; }
   .mitre-panel { max-height: none; }
 }
-<<<<<<< codex/verify-the-structure-srus8u
 
 .side-panel {
   display: grid;
@@ -183,5 +182,22 @@ body { margin: 0; font-family: "Segoe UI", Tahoma, sans-serif; color: var(--text
 }
 .scenario-runs strong { display: block; color: #a8d4ff; }
 .scenario-runs small { color: #8db6df; }
-=======
->>>>>>> main
+
+
+.jobs-panel {
+  border-top: 1px solid #1b3d66;
+  padding: .75rem;
+  display: grid;
+  gap: .45rem;
+}
+.jobs-panel h3 { margin: 0 0 .25rem; font-size: .95rem; }
+.jobs-panel label { font-size: .78rem; display: grid; gap: .2rem; }
+.jobs-panel select {
+  background: #020a19;
+  border: 1px solid #224772;
+  color: #d8eeff;
+  padding: .45rem .5rem;
+  border-radius: 4px;
+}
+.jobs-actions { display: flex; gap: .4rem; }
+

@@ -174,11 +174,8 @@ If `API_KEY` is configured, send `x-api-key: <value>` for `/blueprints`, `/jobs`
 A visual concept prototype is available under `frontend/`:
 
 - `frontend/index.html`: console selector (White/Red/Blue Team)
-<<<<<<< codex/verify-the-structure-srus8u
+- `frontend/network.html`: White Team network operational view with live MITRE, scenarios, blueprints and jobs controls
 - `frontend/network.html`: White Team network operational view with live MITRE panel and scenario controls
-=======
-- `frontend/network.html`: White Team network operational view with live MITRE catalog panel
->>>>>>> main
 
 Run locally:
 
@@ -187,11 +184,8 @@ cd frontend
 python3 -m http.server 8080
 ```
 
-<<<<<<< codex/verify-the-structure-srus8u
+Then open `http://localhost:8080`. In `network.html`, configure backend URL/API key to orchestrate `GET /mitre/techniques`, `POST/GET /scenarios/runs`, `POST /scenarios/runs/{id}/stop`, `GET/POST /blueprints`, and `GET/POST /jobs`.
 Then open `http://localhost:8080`. In `network.html`, configure backend URL/API key to load `GET /mitre/techniques` and orchestrate `POST/GET /scenarios/runs` + `POST /scenarios/runs/{id}/stop`.
-=======
-Then open `http://localhost:8080`. In `network.html`, configure backend URL/API key to load `GET /mitre/techniques`.
->>>>>>> main
 
 ### Running tests
 
