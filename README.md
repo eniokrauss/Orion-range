@@ -189,9 +189,9 @@ Then open `http://localhost:8080`. In `network.html`, configure backend URL/API 
 
 > Note: these previews are generated from the current prototype state.
 
-![Console selector preview](browser:/tmp/codex_browser_invocations/37764c7ca5d5c971/artifacts/artifacts/preview-console-selector.png)
+![Console selector preview](docs/screenshots/preview-console-selector.svg)
 
-![Network console preview](browser:/tmp/codex_browser_invocations/06e122d41d1809b2/artifacts/artifacts/frontend-network-realtime-events.png)
+![Network console preview](docs/screenshots/preview-network-console.svg)
 
 ### Running tests
 
