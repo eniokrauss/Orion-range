@@ -174,8 +174,7 @@ If `API_KEY` is configured, send `x-api-key: <value>` for `/blueprints`, `/jobs`
 A visual concept prototype is available under `frontend/`:
 
 - `frontend/index.html`: console selector (White/Red/Blue Team)
-- `frontend/network.html`: White Team network operational view with live MITRE, scenarios, blueprints and jobs controls
-- `frontend/network.html`: White Team network operational view with live MITRE panel and scenario controls
+- `frontend/network.html`: White Team network operational view with live MITRE, scenarios, blueprints, jobs and dynamic topology/events
 
 Run locally:
 
@@ -184,8 +183,7 @@ cd frontend
 python3 -m http.server 8080
 ```
 
-Then open `http://localhost:8080`. In `network.html`, configure backend URL/API key to orchestrate `GET /mitre/techniques`, `POST/GET /scenarios/runs`, `POST /scenarios/runs/{id}/stop`, `GET/POST /blueprints`, and `GET/POST /jobs`.
-Then open `http://localhost:8080`. In `network.html`, configure backend URL/API key to load `GET /mitre/techniques` and orchestrate `POST/GET /scenarios/runs` + `POST /scenarios/runs/{id}/stop`.
+Then open `http://localhost:8080`. In `network.html`, configure backend URL/API key to orchestrate `GET /mitre/techniques`, `POST/GET /scenarios/runs`, `POST /scenarios/runs/{id}/stop`, `GET/POST /blueprints`, and `GET/POST /jobs`. The topology now reacts to active/failed job+scenario states and shows a live events feed.
 
 ### Running tests
 

@@ -46,40 +46,40 @@
           <g class="links">
             <line x1="600" y1="130" x2="600" y2="220"/>
             <line x1="600" y1="220" x2="450" y2="330"/>
-            <line x1="600" y1="220" x2="760" y2="330" class="dmz"/>
+            <line id="link-dmz" x1="600" y1="220" x2="760" y2="330" class="dmz"/>
             <line x1="450" y1="330" x2="310" y2="460"/>
             <line x1="450" y1="330" x2="520" y2="470"/>
             <line x1="760" y1="330" x2="670" y2="470" class="dmz"/>
             <line x1="760" y1="330" x2="860" y2="470" class="dmz"/>
-            <line x1="600" y1="130" x2="885" y2="200" class="threat"/>
+            <line id="link-threat" x1="600" y1="130" x2="885" y2="200" class="threat"/>
           </g>
 
-          <g class="node" transform="translate(600 80)">
+          <g id="node-fw" class="node" transform="translate(600 80)">
             <circle r="33"/><text y="55">FW-Edge</text>
           </g>
-          <g class="node" transform="translate(600 220)">
+          <g id="node-core" class="node" transform="translate(600 220)">
             <circle r="35"/><text y="55">R1-Core</text>
           </g>
-          <g class="node" transform="translate(450 330)">
+          <g id="node-sw-core" class="node" transform="translate(450 330)">
             <circle r="33"/><text y="55">SW-Core</text>
           </g>
-          <g class="node" transform="translate(760 330)">
+          <g id="node-sw-dmz" class="node" transform="translate(760 330)">
             <circle r="33"/><text y="55">SW-DMZ</text>
           </g>
 
-          <g class="node service" transform="translate(310 460)">
+          <g id="node-siem" class="node service" transform="translate(310 460)">
             <circle r="31"/><text y="52">SIEM</text>
           </g>
-          <g class="node service" transform="translate(520 470)">
+          <g id="node-ids" class="node service" transform="translate(520 470)">
             <circle r="31"/><text y="52">IDS</text>
           </g>
-          <g class="node dmz-node" transform="translate(670 470)">
+          <g id="node-web" class="node dmz-node" transform="translate(670 470)">
             <circle r="31"/><text y="52">SRV-Web</text>
           </g>
-          <g class="node dmz-node" transform="translate(860 470)">
+          <g id="node-db" class="node dmz-node" transform="translate(860 470)">
             <circle r="31"/><text y="52">SRV-DB</text>
           </g>
-          <g class="node threat-node" transform="translate(885 200)">
+          <g id="node-attacker" class="node threat-node" transform="translate(885 200)">
             <circle r="31"/><text y="52">Kali-Attacker</text>
           </g>
         </svg>
@@ -102,6 +102,12 @@
           </label>
           <button id="start-scenario" class="btn">Iniciar cenário</button>
           <ul id="scenario-runs" class="scenario-runs"></ul>
+        </section>
+
+
+        <section class="events-panel">
+          <h3>Live Events</h3>
+          <ul id="events-list" class="events-list"></ul>
         </section>
 
         <section class="jobs-panel">

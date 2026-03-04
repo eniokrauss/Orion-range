@@ -54,4 +54,5 @@
   - [x] Initial `GET /mitre/techniques` integration in network console prototype.
   - [x] Initial scenario controls (`start/list/stop`) from frontend network console.
   - [x] Initial blueprints/jobs controls from frontend network console.
+  - [x] Initial dynamic topology state + live events feed from runtime activity.
 - [ ] Real-time topology updates and scenario controls.
