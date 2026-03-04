@@ -35,6 +35,7 @@
       </label>
       <button id="save-config" class="btn">Salvar configuração</button>
       <button id="refresh-mitre" class="btn ghost">Atualizar MITRE</button>
+      <button id="refresh-runs" class="btn ghost">Atualizar cenários</button>
       <span id="mitre-status" class="status-text">Aguardando carregamento…</span>
     </section>
 
@@ -83,10 +84,24 @@
         </svg>
       </section>
 
-      <aside class="panel mitre-panel">
-        <h3>Técnicas MITRE carregadas</h3>
-        <p>Fonte: <code>GET /mitre/techniques</code></p>
-        <ul id="mitre-list"></ul>
+      <aside class="panel side-panel">
+        <section class="mitre-panel">
+          <h3>Técnicas MITRE carregadas</h3>
+          <p>Fonte: <code>GET /mitre/techniques</code></p>
+          <ul id="mitre-list"></ul>
+        </section>
+
+        <section class="scenario-panel">
+          <h3>Orquestração de Cenários</h3>
+          <label>Nome do cenário
+            <input id="scenario-name" type="text" value="mitre-live-sim" />
+          </label>
+          <label>Técnica MITRE
+            <select id="scenario-technique"></select>
+          </label>
+          <button id="start-scenario" class="btn">Iniciar cenário</button>
+          <ul id="scenario-runs" class="scenario-runs"></ul>
+        </section>
       </aside>
     </main>
 

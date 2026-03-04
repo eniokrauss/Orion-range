@@ -136,3 +136,52 @@ body { margin: 0; font-family: "Segoe UI", Tahoma, sans-serif; color: var(--text
   .topology { height: 520px; }
   .mitre-panel { max-height: none; }
 }
+<<<<<<< codex/verify-the-structure-srus8u
+
+.side-panel {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: .6rem;
+  min-height: 0;
+}
+
+.scenario-panel {
+  border-top: 1px solid #1b3d66;
+  padding: .75rem;
+  display: grid;
+  gap: .45rem;
+}
+.scenario-panel h3 { margin: 0 0 .25rem; font-size: .95rem; }
+.scenario-panel label { font-size: .78rem; display: grid; gap: .2rem; }
+.scenario-panel input,
+.scenario-panel select {
+  background: #020a19;
+  border: 1px solid #224772;
+  color: #d8eeff;
+  padding: .45rem .5rem;
+  border-radius: 4px;
+}
+
+.scenario-runs {
+  list-style: none;
+  padding: 0;
+  margin: .35rem 0 0;
+  display: grid;
+  gap: .4rem;
+  max-height: 190px;
+  overflow: auto;
+}
+.scenario-runs li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .5rem;
+  border: 1px solid #1b3d66;
+  border-radius: 6px;
+  background: rgba(6, 22, 46, .6);
+  padding: .45rem .5rem;
+}
+.scenario-runs strong { display: block; color: #a8d4ff; }
+.scenario-runs small { color: #8db6df; }
+=======
+>>>>>>> main
