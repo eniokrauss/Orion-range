@@ -156,6 +156,7 @@ If `API_KEY` is configured, send `x-api-key: <value>` for `/blueprints`, `/jobs`
 - `POST /jobs` create asynchronous job (`provision`, `snapshot`, `reset`)
 - `snapshot` now establishes a baseline and `reset` requires this baseline
 - `GET /jobs` list submitted jobs (supports `status`, `action`, `limit`, `offset`)
+- job runner now guards against duplicate in-process execution for the same `job_id`
 - `GET /jobs/{id}` get job status
 
 ### Scenario API (current stage)
