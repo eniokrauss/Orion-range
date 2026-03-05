@@ -5,6 +5,7 @@
 A fase atual entrega backend FastAPI com validação semântica, persistência de blueprints, orquestração de jobs e execução de cenários com mapeamento MITRE:
 
 - **API layer**: rotas de health, version, blueprint validate/CRUD, jobs, scenarios e ops overview.
+- **API layer**: rotas de health, version, blueprint validate/CRUD, jobs, scenarios e ops overview.
 - **Domain schemas**: modelos Pydantic para blueprint, job e scenario.
 - **Services**: validação semântica, repositórios e runners assíncronos.
 - **Persistence**: SQLAlchemy ORM com tabelas `blueprints`, `jobs`, `baselines` e `scenario_runs`.

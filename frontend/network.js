@@ -32,6 +32,8 @@ const linkDmz = document.getElementById('link-dmz');
 
 let localEvents = [];
 let backendEvents = [];
+let localEvents = [];
+let backendEvents = [];
 let lastScenarioRuns = [];
 let lastJobs = [];
 
@@ -237,6 +239,7 @@ const startScenarioRun = async () => {
     addEvent(`Scenario start: ${run.scenario_name}.`, 'ok');
     await fetchScenarioRuns();
     await fetchOpsOverview();
+    await fetchOpsOverview();
   } catch (error) {
     setStatus(`Erro ao iniciar cenário: ${error.message}`, 'error');
     addEvent('Falha ao iniciar cenário.', 'error');
@@ -304,6 +307,7 @@ const createDemoBlueprint = async () => {
     addEvent('Blueprint demo criado.', 'ok');
     await fetchBlueprints();
     await fetchOpsOverview();
+    await fetchOpsOverview();
   } catch (error) {
     setStatus(`Erro ao criar blueprint: ${error.message}`, 'error');
   }
@@ -351,6 +355,7 @@ const submitJob = async () => {
     addEvent(`Job submitted: ${job.action}.`, 'info');
     await fetchJobs();
     await fetchOpsOverview();
+    await fetchOpsOverview();
   } catch (error) {
     setStatus(`Erro ao enviar job: ${error.message}`, 'error');
   }
@@ -367,6 +372,7 @@ const bootstrap = async () => {
   await fetchBlueprints();
   await fetchJobs();
   await fetchOpsOverview();
+  await fetchOpsOverview();
 };
 
 saveButton.addEventListener('click', async () => {
@@ -375,6 +381,7 @@ saveButton.addEventListener('click', async () => {
   await fetchScenarioRuns();
   await fetchBlueprints();
   await fetchJobs();
+  await fetchOpsOverview();
   await fetchOpsOverview();
 });
 
@@ -387,6 +394,7 @@ submitJobButton.addEventListener('click', submitJob);
 
 setInterval(fetchScenarioRuns, 4000);
 setInterval(fetchJobs, 5000);
+setInterval(fetchOpsOverview, 4500);
 setInterval(fetchOpsOverview, 4500);
 
 bootstrap();
