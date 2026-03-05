@@ -175,6 +175,8 @@ If `API_KEY` is configured, send `x-api-key: <value>` for `/blueprints`, `/jobs`
 ### Ops API (aggregated operational overview)
 
 - `GET /ops/overview` returns consolidated metrics, status counters and recent events for frontend operational consoles
+- `GET /metrics` exposes Prometheus-compatible HTTP metrics
+- all responses include `x-request-id` header for request correlation
 
 A visual concept prototype is available under `frontend/`:
 

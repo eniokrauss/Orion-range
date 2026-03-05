@@ -45,6 +45,7 @@
 - [ ] AuthN/AuthZ and multi-tenant boundaries.
   - [x] Initial API key protection for domain endpoints.
 - [ ] Structured observability (metrics/tracing/log correlation).
+  - [x] Initial `/metrics` endpoint and request correlation header (`x-request-id`).
 - [ ] SLOs, alerts, and operational runbooks.
 
 
