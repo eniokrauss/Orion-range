@@ -164,6 +164,7 @@ If `API_KEY` is configured, send `x-api-key: <value>` for `/blueprints`, `/jobs`
 - `GET /scenarios/runs` list runs (supports `status`, `scenario_name`, `limit`, `offset`)
 - `GET /scenarios/runs/{id}` get run status/timeline
 - `POST /scenarios/runs/{id}/stop` request stop
+- scenario runner now uses thread-safe stop handling with per-run cleanup to avoid stale in-memory state
 
 ### MITRE API (plugin discovery)
 
