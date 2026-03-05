@@ -84,6 +84,22 @@ It is not designed for offensive use outside authorized and legal environments.
 
 ---
 
+## Development Execution Order
+
+To deliver the project in full, execution follows `ROADMAP.md` in this order:
+
+1. Foundation and delivery reliability
+2. Blueprint contract hardening
+3. Persistence layer
+4. Job orchestration
+5. Hypervisor adapter (Proxmox-first)
+6. Baseline snapshot and deterministic reset
+7. Scenario simulation engine
+8. MITRE ATT&CK plugin support
+9. Production hardening
+
+---
+
 ## Roadmap
 
 Planned milestones:
@@ -101,7 +117,105 @@ Planned milestones:
 
 > ⚠ Orion Range is currently under active development.
 
-Instructions will be provided as the core stabilizes.
+### Backend local run
+
+```bash
+cd backend
+python -m venv .venv
+source .venv/bin/activate
+pip install -e .[dev]
+uvicorn app.main:app --reload
+```
+
+> Optional: configure `DATABASE_URL` (default uses local SQLite), `HYPERVISOR_PROVIDER` (default: `proxmox`) and `API_KEY` to protect domain endpoints.
+
+
+
+
+### Blueprint API (contract hardening)
+
+If `API_KEY` is configured, send `x-api-key: <value>` for `/blueprints`, `/jobs`, and `/scenarios` endpoints.
+
+- `POST /blueprints/validate` validates semantic rules without persisting
+- `POST /blueprints`, `GET /blueprints`, `GET /blueprints/{id}`, `DELETE /blueprints/{id}`
+- `GET /blueprints` supports `name`, `limit`, and `offset` query params
+- Blueprint payload now includes `schema_version` (current supported: `1.0`)
+- Validation/domain errors follow machine-consumable shape:
+
+```json
+{
+  "detail": {
+    "code": "ERROR_CODE",
+    "message": "human readable message"
+  }
+}
+```
+
+### Job orchestration API (current stage)
+
+- `POST /jobs` create asynchronous job (`provision`, `snapshot`, `reset`)
+- `snapshot` now establishes a baseline and `reset` requires this baseline
+- `GET /jobs` list submitted jobs (supports `status`, `action`, `limit`, `offset`)
+- job runner now guards against duplicate in-process execution for the same `job_id`
+- `GET /jobs/{id}` get job status
+
+### Scenario API (current stage)
+
+- `POST /scenarios/runs` start scenario run
+- `GET /scenarios/runs` list runs (supports `status`, `scenario_name`, `limit`, `offset`)
+- `GET /scenarios/runs/{id}` get run status/timeline
+- `POST /scenarios/runs/{id}/stop` request stop
+- scenario runner now uses thread-safe stop handling with per-run cleanup to avoid stale in-memory state
+
+### MITRE API (plugin discovery)
+
+- `GET /mitre/techniques` list loaded techniques and mapped actions
+- response includes plugin source, technique id, tactic tags and executable action
+
+### Frontend concept prototype (White Team)
+
+### Ops API (aggregated operational overview)
+
+- `GET /ops/overview` returns consolidated metrics, status counters and recent events for frontend operational consoles
+- `GET /metrics` exposes Prometheus-compatible HTTP metrics
+- all responses include `x-request-id` header for request correlation
+
+A visual concept prototype is available under `frontend/`:
+
+- `frontend/index.html`: console selector (White/Red/Blue Team)
+- `frontend/network.html`: White Team network operational view with live MITRE, scenarios, blueprints, jobs and dynamic topology/events
+
+Run locally:
+
+```bash
+cd frontend
+python3 -m http.server 8080
+```
+
+Then open `http://localhost:8080`. In `network.html`, configure backend URL/API key to orchestrate `GET /mitre/techniques`, `POST/GET /scenarios/runs`, `POST /scenarios/runs/{id}/stop`, `GET/POST /blueprints`, `GET/POST /jobs`, and `GET /ops/overview`. The topology and stats now react to aggregated runtime state and the live events feed merges backend overview events with local actions.
+
+### Frontend visual previews (current development snapshot)
+
+> Note: these previews are generated from the current prototype state.
+
+![Console selector preview](docs/screenshots/preview-console-selector.svg)
+
+![Network console preview](docs/screenshots/preview-network-console.svg)
+
+### Running tests
+
+```bash
+cd backend
+pytest
+```
+
+### Docker Compose
+
+```bash
+docker compose -f deploy/docker-compose.yml up --build
+```
+
+Compose starts `orion-api` and `postgres` for development persistence.
 
 ---
 

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+  <rect width="1440" height="900" fill="#030b22"/>
+  <rect width="1440" height="52" fill="#0a1734"/>
+  <text x="16" y="33" font-size="22" fill="#9bc9ff" font-family="Arial" font-weight="700">WHITE.TEAM — NETWORK</text>
+  <g transform="translate(10,64)"><rect width="226" height="62" fill="#081a39" stroke="#2a5d94"/><rect x="236" width="226" height="62" fill="#081a39" stroke="#2a5d94"/><rect x="472" width="226" height="62" fill="#081a39" stroke="#2a5d94"/><rect x="708" width="226" height="62" fill="#081a39" stroke="#2a5d94"/><rect x="944" width="226" height="62" fill="#081a39" stroke="#2a5d94"/><rect x="1180" width="226" height="62" fill="#081a39" stroke="#2a5d94"/></g>
+  <rect x="10" y="190" width="1070" height="670" fill="#04122d" stroke="#2a5d94"/>
+  <rect x="1090" y="190" width="340" height="670" fill="#081a39" stroke="#2a5d94"/>
+  <line x1="560" y1="250" x2="860" y2="320" stroke="#ff5e7b" stroke-width="3"/><line x1="560" y1="250" x2="560" y2="330" stroke="#66b2ff" stroke-width="3"/><line x1="560" y1="330" x2="430" y2="430" stroke="#66b2ff" stroke-width="3"/><line x1="560" y1="330" x2="700" y2="430" stroke="#4addb5" stroke-width="3"/>
+  <circle cx="560" cy="250" r="18" fill="#0b2a5b" stroke="#7ec0ff" stroke-width="3"/><circle cx="560" cy="330" r="18" fill="#0b2a5b" stroke="#7ec0ff" stroke-width="3"/><circle cx="430" cy="430" r="18" fill="#0b2a5b" stroke="#7ec0ff" stroke-width="3"/><circle cx="700" cy="430" r="18" fill="#0b2a5b" stroke="#4addb5" stroke-width="3"/><circle cx="860" cy="320" r="18" fill="#0b2a5b" stroke="#ff5e7b" stroke-width="3"/>
+  <text x="1110" y="226" fill="#9fd0ff" font-size="20" font-family="Arial" font-weight="700">LIVE PANELS</text>
+  <text x="1110" y="258" fill="#b8dafd" font-size="15" font-family="Arial">• MITRE techniques synced</text>
+  <text x="1110" y="283" fill="#b8dafd" font-size="15" font-family="Arial">• Scenario controls active</text>
+  <text x="1110" y="308" fill="#b8dafd" font-size="15" font-family="Arial">• Blueprint/job controls active</text>
+  <text x="1110" y="350" fill="#9fd0ff" font-size="19" font-family="Arial" font-weight="700">LIVE EVENTS</text>
+  <rect x="1100" y="365" width="320" height="34" fill="#0c234c" stroke="#2a5d94"/><rect x="1100" y="408" width="320" height="34" fill="#0c234c" stroke="#2a5d94"/><rect x="1100" y="451" width="320" height="34" fill="#0c234c" stroke="#2a5d94"/>
+  <text x="1110" y="387" fill="#bde0ff" font-size="14" font-family="Arial">Console iniciado</text><text x="1110" y="430" fill="#bde0ff" font-size="14" font-family="Arial">MITRE sync: 3 técnicas</text><text x="1110" y="473" fill="#bde0ff" font-size="14" font-family="Arial">Scenario/job activity</text>
+  <text x="720" y="886" fill="#8db4dc" font-size="16" text-anchor="middle" font-family="Arial">Preview snapshot stored in repository (docs/screenshots)</text>
+</svg>
