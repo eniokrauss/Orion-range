@@ -29,9 +29,24 @@ class JobRepository:
                 raise JobNotFoundError(f"Job '{job_id}' was not found")
             return record
 
-    def list(self) -> list[JobRecord]:
+    def list(
+        self,
+        *,
+        status: str | None = None,
+        action: str | None = None,
+        limit: int = 100,
+        offset: int = 0,
+    ) -> list[JobRecord]:
         with SessionLocal() as session:
-            result = session.execute(select(JobRecord).order_by(JobRecord.created_at.desc()))
+            query = select(JobRecord).order_by(JobRecord.created_at.desc())
+
+            if status:
+                query = query.where(JobRecord.status == status)
+            if action:
+                query = query.where(JobRecord.action == action)
+
+            query = query.limit(limit).offset(offset)
+            result = session.execute(query)
             return list(result.scalars().all())
 
     def update_status(self, job_id: str, status: str, attempts: int, last_error: str | None = None) -> JobRecord:

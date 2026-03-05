@@ -127,6 +127,26 @@ def test_create_job_with_missing_blueprint_fails():
     assert "was not found" in final_job["last_error"]
 
 
+def test_list_jobs_supports_filters_and_pagination():
+    blueprint_id = _create_blueprint()
+
+    for action in ["provision", "snapshot", "reset"]:
+        create_job_response = client.post(
+            "/jobs",
+            json={"action": action, "target_blueprint_id": blueprint_id, "max_attempts": 1},
+        )
+        assert create_job_response.status_code == 200
+
+    filtered = client.get("/jobs", params={"action": "snapshot"})
+    assert filtered.status_code == 200
+    filtered_jobs = filtered.json()
+    assert len(filtered_jobs) == 1
+    assert filtered_jobs[0]["action"] == "snapshot"
+
+    paginated = client.get("/jobs", params={"limit": 2, "offset": 1})
+    assert paginated.status_code == 200
+    assert len(paginated.json()) == 2
+
 def test_get_missing_job_returns_standard_error_shape():
     response = client.get("/jobs/missing-job")
     assert response.status_code == 404
