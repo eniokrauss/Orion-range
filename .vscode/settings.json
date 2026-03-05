@@ -1,0 +1,9 @@
+{
+    "chatgpt.openOnStartup": true,
+    "python.analysis.extraPaths": [
+        "./backend"
+    ],
+    "terminal.integrated.env.windows": {
+        "PYTHONPATH": "${workspaceFolder}\\backend"
+    }
+}

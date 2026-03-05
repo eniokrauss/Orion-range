@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#030f2c"/><stop offset="100%" stop-color="#04133a"/></linearGradient></defs>
+  <rect width="1440" height="900" fill="url(#bg)"/>
+  <text x="720" y="120" font-size="62" fill="#cde5ff" text-anchor="middle" font-family="Arial" font-weight="700">ORION.RANGE</text>
+  <text x="720" y="165" font-size="16" fill="#7f9ec3" text-anchor="middle" font-family="Arial">CYBER RANGE ORCHESTRATOR — SELECT CONSOLE</text>
+  <g transform="translate(175,210)"><rect width="350" height="260" rx="10" fill="#071a3f" stroke="#2a5c95"/><text x="20" y="115" font-size="42" fill="#6db7ff" font-family="Arial" font-weight="700">WHITE TEAM</text><text x="20" y="150" font-size="30" fill="#b8d2ee" font-family="Arial">Operational Control</text></g>
+  <g transform="translate(545,210)"><rect width="350" height="260" rx="10" fill="#071a3f" stroke="#2a5c95"/><text x="20" y="115" font-size="42" fill="#ff4f7b" font-family="Arial" font-weight="700">RED TEAM</text><text x="20" y="150" font-size="30" fill="#b8d2ee" font-family="Arial">Attack Console</text></g>
+  <g transform="translate(915,210)"><rect width="350" height="260" rx="10" fill="#071a3f" stroke="#2a5c95"/><text x="20" y="115" font-size="42" fill="#62aaff" font-family="Arial" font-weight="700">BLUE TEAM</text><text x="20" y="150" font-size="30" fill="#b8d2ee" font-family="Arial">Defense Operations</text></g>
+  <text x="720" y="560" font-size="22" fill="#8eb4dc" text-anchor="middle" font-family="Arial">Preview snapshot stored in repository (docs/screenshots)</text>
+</svg>

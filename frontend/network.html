@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>White.Team Network</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="theme-bg">
+    <header class="topbar">
+      <div class="brand">◈ WHITE.<span>TEAM</span></div>
+      <nav>
+        <a href="#" class="active">NETWORK</a>
+        <a href="#">SCENARIOS</a>
+        <a href="#">EVENTS</a>
+      </nav>
+      <button class="pause-btn">PAUSAR LAB</button>
+    </header>
+
+    <section class="stats">
+      <article><label>JOBS ATIVOS</label><strong id="metric-active-jobs">0</strong></article>
+      <article><label>JOBS TOTAIS</label><strong id="metric-jobs-total">0</strong></article>
+      <article><label>ALERTAS</label><strong id="metric-alerts">0</strong></article>
+      <article><label>STEPS ATIVOS</label><strong id="metric-active-steps">0</strong></article>
+      <article><label>ANOMALIAS</label><strong id="metric-failed-jobs">0 falhas</strong></article>
+      <article><label>CENÁRIOS</label><strong id="active-scenarios">0 ativos</strong></article>
+    </section>
+
+    <section class="api-controls panel">
+      <label>Backend API URL
+        <input id="api-base" type="text" placeholder="http://localhost:8000" />
+      </label>
+      <label>API Key (optional)
+        <input id="api-key" type="password" placeholder="x-api-key" />
+      </label>
+      <label>Access Token (optional)
+        <input id="api-token" type="password" placeholder="Bearer token" />
+      </label>
+      <button id="save-config" class="btn">Salvar configuração</button>
+      <button id="refresh-mitre" class="btn ghost">Atualizar MITRE</button>
+      <button id="refresh-runs" class="btn ghost">Atualizar cenários</button>
+      <button id="refresh-jobs" class="btn ghost">Atualizar jobs</button>
+      <button id="refresh-sessions" class="btn ghost">Atualizar sessões</button>
+      <button id="logout-token" class="btn ghost">Logout token</button>
+      <button id="logout-all" class="btn ghost">Logout all</button>
+      <button id="run-gc" class="btn ghost">GC dry-run</button>
+      <span id="mitre-status" class="status-text">Aguardando carregamento…</span>
+    </section>
+
+    <main class="network-layout">
+      <section class="network-stage">
+        <svg viewBox="0 0 1200 680" class="topology" xmlns="http://www.w3.org/2000/svg">
+          <g class="links">
+            <line x1="600" y1="130" x2="600" y2="220"/>
+            <line x1="600" y1="220" x2="450" y2="330"/>
+            <line id="link-dmz" x1="600" y1="220" x2="760" y2="330" class="dmz"/>
+            <line x1="450" y1="330" x2="310" y2="460"/>
+            <line x1="450" y1="330" x2="520" y2="470"/>
+            <line x1="760" y1="330" x2="670" y2="470" class="dmz"/>
+            <line x1="760" y1="330" x2="860" y2="470" class="dmz"/>
+            <line id="link-threat" x1="600" y1="130" x2="885" y2="200" class="threat"/>
+          </g>
+
+          <g id="node-fw" class="node" transform="translate(600 80)">
+            <circle r="33"/><text y="55">FW-Edge</text>
+          </g>
+          <g id="node-core" class="node" transform="translate(600 220)">
+            <circle r="35"/><text y="55">R1-Core</text>
+          </g>
+          <g id="node-sw-core" class="node" transform="translate(450 330)">
+            <circle r="33"/><text y="55">SW-Core</text>
+          </g>
+          <g id="node-sw-dmz" class="node" transform="translate(760 330)">
+            <circle r="33"/><text y="55">SW-DMZ</text>
+          </g>
+
+          <g id="node-siem" class="node service" transform="translate(310 460)">
+            <circle r="31"/><text y="52">SIEM</text>
+          </g>
+          <g id="node-ids" class="node service" transform="translate(520 470)">
+            <circle r="31"/><text y="52">IDS</text>
+          </g>
+          <g id="node-web" class="node dmz-node" transform="translate(670 470)">
+            <circle r="31"/><text y="52">SRV-Web</text>
+          </g>
+          <g id="node-db" class="node dmz-node" transform="translate(860 470)">
+            <circle r="31"/><text y="52">SRV-DB</text>
+          </g>
+
+          <g id="node-attacker" class="node threat-node" transform="translate(885 150)">
+            <circle r="30"/><text y="50">ATTACKER</text>
+          </g>
+        </svg>
+      </section>
+
+      <aside class="panel side-panel">
+        <section class="mitre-panel">
+          <h3>Técnicas MITRE carregadas</h3>
+          <p>Fonte: <code>GET /mitre/techniques</code></p>
+          <ul id="mitre-list"></ul>
+        </section>
+
+        <section class="scenario-panel">
+          <h3>Orquestração de Cenários</h3>
+          <label>Nome do cenário
+            <input id="scenario-name" type="text" value="mitre-live-sim" />
+          </label>
+          <label>Técnica MITRE
+            <select id="scenario-technique"></select>
+          </label>
+          <button id="start-scenario" class="btn">Iniciar cenário</button>
+          <ul id="scenario-runs" class="scenario-runs"></ul>
+        </section>
+
+        <section class="events-panel">
+          <h3>Live Events</h3>
+          <ul id="events-list" class="events-list"></ul>
+        </section>
+
+        <section class="jobs-panel">
+          <h3>Blueprints &amp; Jobs</h3>
+          <div class="jobs-actions">
+            <button id="create-blueprint" class="btn ghost">Criar blueprint demo</button>
+          </div>
+          <label>Blueprint alvo
+            <select id="job-blueprint"></select>
+          </label>
+          <label>Ação do job
+            <select id="job-action">
+              <option value="provision">provision</option>
+              <option value="snapshot">snapshot</option>
+              <option value="reset">reset</option>
+              <option value="teardown">teardown</option>
+            </select>
+          </label>
+          <button id="submit-job" class="btn">Enviar job</button>
+          <ul id="jobs-list" class="scenario-runs"></ul>
+        </section>
+
+        <section class="sessions-panel">
+          <h3>JWT Sessions</h3>
+          <label>Modo
+            <select id="sessions-scope">
+              <option value="self">Minha sessão</option>
+              <option value="user">Usuário (admin)</option>
+            </select>
+          </label>
+          <label>Usuário alvo (admin)
+            <input id="sessions-user-id" type="text" placeholder="user_id" />
+          </label>
+          <div class="sessions-filters">
+            <label>Token
+              <select id="sessions-token-type">
+                <option value="">todos</option>
+                <option value="access">access</option>
+                <option value="refresh">refresh</option>
+              </select>
+            </label>
+            <label>Reason
+              <select id="sessions-reason">
+                <option value="">todos</option>
+                <option value="logout">logout</option>
+                <option value="refresh-rotated">refresh-rotated</option>
+              </select>
+            </label>
+            <label>Limit
+              <select id="sessions-limit">
+                <option value="5">5</option>
+                <option value="10" selected>10</option>
+                <option value="20">20</option>
+              </select>
+            </label>
+          </div>
+          <div class="sessions-actions">
+            <button id="sessions-prev" class="btn ghost">Prev</button>
+            <button id="sessions-next" class="btn ghost">Next</button>
+          </div>
+          <small id="sessions-meta" class="status-text">Sem dados</small>
+          <ul id="sessions-list" class="steps-list"></ul>
+        </section>
+
+        <!-- Job checkpoint steps panel — populated dynamically -->
+        <section class="steps-panel" id="steps-panel" style="display:none">
+          <h3>Checkpoints do Job <span id="steps-job-id"></span></h3>
+          <ul id="steps-list" class="steps-list"></ul>
+          <button id="close-steps" class="btn ghost" style="margin-top:6px">Fechar</button>
+        </section>
+
+        <!-- GC report panel — populated by dry-run -->
+        <section class="gc-panel" id="gc-panel" style="display:none">
+          <h3>GC Report <span id="gc-dry-label"></span></h3>
+          <ul id="gc-orphans" class="steps-list"></ul>
+          <button id="close-gc" class="btn ghost" style="margin-top:6px">Fechar</button>
+        </section>
+      </aside>
+    </main>
+
+    <script src="./network.js"></script>
+  </body>
+</html>
