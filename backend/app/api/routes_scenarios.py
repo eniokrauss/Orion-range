@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Query
 
 from app.core.errors import ErrorCode, http_error
 from app.schemas.scenario import ScenarioStartRequest
@@ -21,8 +21,18 @@ def start_scenario_run(payload: ScenarioStartRequest):
 
 
 @router.get("/runs")
-def list_scenario_runs():
-    runs = scenario_repository.list()
+def list_scenario_runs(
+    status: str | None = Query(default=None),
+    scenario_name: str | None = Query(default=None),
+    limit: int = Query(default=100, ge=1, le=500),
+    offset: int = Query(default=0, ge=0),
+):
+    runs = scenario_repository.list(
+        status=status,
+        scenario_name=scenario_name,
+        limit=limit,
+        offset=offset,
+    )
     return [
         {
             "id": run.id,

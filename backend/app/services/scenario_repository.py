@@ -17,9 +17,24 @@ class ScenarioRepository:
             session.refresh(record)
             return record
 
-    def list(self) -> list[ScenarioRunRecord]:
+    def list(
+        self,
+        *,
+        status: str | None = None,
+        scenario_name: str | None = None,
+        limit: int = 100,
+        offset: int = 0,
+    ) -> list[ScenarioRunRecord]:
         with SessionLocal() as session:
-            result = session.execute(select(ScenarioRunRecord).order_by(ScenarioRunRecord.created_at.desc()))
+            query = select(ScenarioRunRecord).order_by(ScenarioRunRecord.created_at.desc())
+
+            if status:
+                query = query.where(ScenarioRunRecord.status == status)
+            if scenario_name:
+                query = query.where(ScenarioRunRecord.scenario_name == scenario_name)
+
+            query = query.limit(limit).offset(offset)
+            result = session.execute(query)
             return list(result.scalars().all())
 
     def get(self, run_id: str) -> ScenarioRunRecord:

@@ -61,6 +61,28 @@ def test_blueprint_crud_lifecycle():
     assert missing_response.json()["detail"]["code"] == "NOT_FOUND"
 
 
+def test_list_blueprints_supports_name_filter_and_pagination():
+    first = _valid_payload()
+    first["name"] = "lab-a"
+    second = _valid_payload()
+    second["name"] = "lab-b"
+    third = _valid_payload()
+    third["name"] = "lab-c"
+
+    assert client.post("/blueprints", json=first).status_code == 200
+    assert client.post("/blueprints", json=second).status_code == 200
+    assert client.post("/blueprints", json=third).status_code == 200
+
+    filtered = client.get("/blueprints", params={"name": "lab-b"})
+    assert filtered.status_code == 200
+    filtered_items = filtered.json()
+    assert len(filtered_items) == 1
+    assert filtered_items[0]["name"] == "lab-b"
+
+    paginated = client.get("/blueprints", params={"limit": 2, "offset": 1})
+    assert paginated.status_code == 200
+    assert len(paginated.json()) == 2
+
 def test_validate_blueprint_unknown_network_returns_400():
     payload = {
         "name": "invalid-lab",

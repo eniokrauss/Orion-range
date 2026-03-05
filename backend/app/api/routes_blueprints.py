@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Query
 
 from app.core.errors import ErrorCode, http_error
 from app.schemas.blueprint import LabBlueprint
@@ -45,8 +45,12 @@ def create_blueprint(blueprint: LabBlueprint):
 
 
 @router.get("")
-def list_blueprints():
-    items = blueprint_repository.list()
+def list_blueprints(
+    name: str | None = Query(default=None),
+    limit: int = Query(default=100, ge=1, le=500),
+    offset: int = Query(default=0, ge=0),
+):
+    items = blueprint_repository.list(name=name, limit=limit, offset=offset)
     return [
         {
             "id": item.id,

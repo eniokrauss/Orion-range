@@ -24,9 +24,21 @@ class BlueprintRepository:
             session.refresh(record)
             return record
 
-    def list(self) -> List[BlueprintRecord]:
+    def list(
+        self,
+        *,
+        name: str | None = None,
+        limit: int = 100,
+        offset: int = 0,
+    ) -> List[BlueprintRecord]:
         with SessionLocal() as session:
-            result = session.execute(select(BlueprintRecord).order_by(BlueprintRecord.created_at.desc()))
+            query = select(BlueprintRecord).order_by(BlueprintRecord.created_at.desc())
+
+            if name:
+                query = query.where(BlueprintRecord.name == name)
+
+            query = query.limit(limit).offset(offset)
+            result = session.execute(query)
             return list(result.scalars().all())
 
     def get(self, blueprint_id: str) -> BlueprintRecord:

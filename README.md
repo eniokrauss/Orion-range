@@ -138,6 +138,7 @@ If `API_KEY` is configured, send `x-api-key: <value>` for `/blueprints`, `/jobs`
 
 - `POST /blueprints/validate` validates semantic rules without persisting
 - `POST /blueprints`, `GET /blueprints`, `GET /blueprints/{id}`, `DELETE /blueprints/{id}`
+- `GET /blueprints` supports `name`, `limit`, and `offset` query params
 - Blueprint payload now includes `schema_version` (current supported: `1.0`)
 - Validation/domain errors follow machine-consumable shape:
 
@@ -154,13 +155,13 @@ If `API_KEY` is configured, send `x-api-key: <value>` for `/blueprints`, `/jobs`
 
 - `POST /jobs` create asynchronous job (`provision`, `snapshot`, `reset`)
 - `snapshot` now establishes a baseline and `reset` requires this baseline
-- `GET /jobs` list submitted jobs
+- `GET /jobs` list submitted jobs (supports `status`, `action`, `limit`, `offset`)
 - `GET /jobs/{id}` get job status
 
 ### Scenario API (current stage)
 
 - `POST /scenarios/runs` start scenario run
-- `GET /scenarios/runs` list runs
+- `GET /scenarios/runs` list runs (supports `status`, `scenario_name`, `limit`, `offset`)
 - `GET /scenarios/runs/{id}` get run status/timeline
 - `POST /scenarios/runs/{id}/stop` request stop
 
