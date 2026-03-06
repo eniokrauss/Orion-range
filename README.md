@@ -1,268 +1,234 @@
 # Orion Range
 
-Orion Range is an open-source Cyber Range Orchestrator developed by Kra2Sec.
+**Orion Range** is an open-source **Cyber Range Orchestration Platform** designed to create realistic adversarial cybersecurity environments for **Red Team vs Blue Team exercises**.
 
-It enables organizations, universities, and security teams to build, execute, and reset realistic cybersecurity simulation environments using infrastructure-as-code principles and MITRE ATT&CK–aligned modeling.
+The platform allows security teams to design, deploy, and operate complex cyber training environments where **attacks and defenses occur in controlled and reproducible infrastructures**.
 
----
-
-## Overview
-
-Modern security training environments are often built manually, making them difficult to reproduce, scale, or reset consistently.
-
-Orion Range solves this by introducing:
-
-- Structured Lab Blueprints (Lab-as-Code)
-- Automated virtual machine provisioning
-- Deterministic baseline snapshot and reset
-- Modular architecture for attack technique modeling
-- API-driven orchestration
-
-Orion Range focuses on operational realism — modeling interconnected systems rather than isolated vulnerable machines.
+Orion Range enables **White Teams to orchestrate complete enterprise environments**, including vulnerable systems, corporate networks, defensive infrastructure, and simulated user ecosystems.
 
 ---
 
-## Core Features (Open-Source Core)
+# Why Orion Range
 
-- Infrastructure Blueprint Engine
-- Automated provisioning (Proxmox-first architecture)
-- Baseline snapshot creation
-- One-click deterministic reset
-- Modular plugin system
-- MITRE ATT&CK technique modeling (extensible)
-- REST API for automation
-- Community-driven templates
+Traditional security labs usually consist of isolated vulnerable machines.
 
----
+Orion Range introduces a different concept:
 
-## Architecture Philosophy
+**enterprise-scale cyber range orchestration.**
 
-Orion Range is built on three core principles:
+Instead of isolated machines, the platform models:
 
-### 1. Reproducibility
-Every environment is defined as code and can be recreated consistently.
+- corporate networks
+- internal services
+- defensive infrastructure
+- user endpoints
+- wireless devices
+- external systems
 
-### 2. Modularity
-Attack techniques, scenarios, and infrastructure components are implemented as extensible modules.
-
-### 3. Operational Realism
-The platform models complete environments composed of interconnected systems, networks, and behaviors.
+This allows realistic adversarial simulations between **Red Teams and Blue Teams**.
 
 ---
 
-## How It Works
+# Key Concepts
 
-1. Define a Lab Blueprint (JSON/YAML).
-2. Orion Range provisions virtual machines via hypervisor integration.
-3. A baseline snapshot is automatically created.
-4. The lab can be reset to its original state deterministically.
+## White Team Orchestration
 
-Future releases will include scenario orchestration, inject events, scoring systems, and AI-assisted scenario generation.
+The **White Team** controls the entire exercise environment.
+
+They can:
+
+- design network topologies
+- insert hosts and services
+- add vulnerabilities
+- define MITRE ATT&CK coverage
+- configure defensive infrastructure
+- integrate external assets
+- define exercise policies
+- deploy or reset environments
+
+---
+
+## Red Team Operations
+
+The **Red Team performs manual offensive operations**.
+
+Orion Range **does not automate attacks**.
+
+Red Team participants access the environment through **VPN** and perform:
+
+- exploitation
+- lateral movement
+- privilege escalation
+- persistence
+- data exfiltration simulation
+
+---
+
+## Blue Team Operations
+
+The **Blue Team monitors and defends the environment**.
+
+The platform allows deployment of defensive infrastructure including:
+
+- SIEM
+- EDR / XDR
+- IDS / IPS
+- network monitoring
+- firewall telemetry
+- endpoint logging
+
+Blue Team analysts investigate events and respond to attacks in real time.
+
+---
+
+# Core Capabilities
+
+## Scenario Builder
+
+White Teams can create environments by defining:
+
+- network topology
+- hosts
+- vulnerabilities
+- credentials
+- defensive infrastructure
+- exercise policies
+- MITRE ATT&CK techniques
+
+---
+
+## Scenario Template Library
+
+Scenarios can be saved as reusable templates.
+
+This allows:
+
+- scenario cloning
+- versioning
+- scenario libraries
+- rapid exercise creation
+
+---
+
+## Visual Topology Designer
+
+Orion Range includes a **visual network topology builder** allowing administrators to design complex environments including:
+
+- internal networks
+- DMZ segments
+- Wi-Fi networks
+- segmented environments
+- enterprise architectures
+
+---
+
+## Hybrid Cyber-Physical Environments
+
+The platform supports **integration with external systems**.
+
+Examples:
+
+- IoT devices
+- electronic prototypes
+- OT equipment
+- remote labs
+- physical training hardware
+
+These systems can appear as nodes in the scenario topology.
+
+---
+
+## Corporate Ecosystem Simulation
+
+Orion Range can simulate realistic corporate environments including:
+
+- workstations
+- servers
+- user endpoints
+- mobile devices
+- BYOD devices
+- guest network devices
+
+Examples include:
+
+- smartphones connected to Wi-Fi
+- personal laptops
+- tablets
+- unmanaged devices
 
 ---
 
 ## MITRE ATT&CK Integration
 
-Orion Range is designed to be MITRE-native.
+Scenarios can be mapped to MITRE ATT&CK techniques.
 
-Attack techniques can be modeled as modular components and applied to nodes within a lab blueprint.
+This enables exercises aligned with real-world adversary behavior including:
 
-This allows structured adversary simulation aligned with established behavioral frameworks.
-
----
-
-## Intended Use
-
-Orion Range is intended exclusively for:
-
-- Authorized cybersecurity training
-- Academic research
-- Defensive capability development
-- Controlled simulation environments
-
-It is not designed for offensive use outside authorized and legal environments.
+- Initial Access
+- Execution
+- Lateral Movement
+- Credential Access
+- Persistence
+- Exfiltration
 
 ---
 
-## Development Execution Order
+## AI-Assisted Scenario Generation (Future)
 
-To deliver the project in full, execution follows `ROADMAP.md` in this order:
+Future versions of Orion Range will support **AI-assisted scenario creation**.
 
-1. Foundation and delivery reliability
-2. Blueprint contract hardening
-3. Persistence layer
-4. Job orchestration
-5. Hypervisor adapter (Proxmox-first)
-6. Baseline snapshot and deterministic reset
-7. Scenario simulation engine
-8. MITRE ATT&CK plugin support
-9. Production hardening
+Administrators will be able to generate environments using natural language prompts.
+
+Example:
+
+Create a corporate network with a DMZ web server vulnerable to RCE, an internal Active Directory environment, a database server, and a SIEM monitoring all endpoints.
+
+The AI engine generates a scenario blueprint which can then be edited and deployed by the White Team.
 
 ---
 
-## Roadmap
+# Architecture Philosophy
 
-Planned milestones:
+Orion Range follows three principles:
 
-- MITRE technique plugin framework
-- Scenario engine with inject support
-- White Team operational control panel
-- Multi-tenant orchestration
+### Infrastructure as Code
+
+All environments are defined using **lab blueprints**.
+
+### Deterministic Environments
+
+Every environment can be **recreated and reset consistently**.
+
+### Operational Realism
+
+The platform models **complete corporate ecosystems** rather than isolated machines.
+
+---
+
+# Development Status
+
+Orion Range is currently under active development.
+
+Planned features include:
+
+- full scenario orchestration engine
 - AI-assisted blueprint generation
-- Enterprise extensions (separate repository)
+- multi-tenant cyber range support
+- advanced MITRE modeling
+- enterprise integrations
 
 ---
 
-## Installation (Early Development)
+# Intended Use
 
-> ⚠ Orion Range is currently under active development.
+Orion Range is designed for:
 
-### Backend local run
-
-```bash
-cd backend
-python -m venv .venv
-source .venv/bin/activate
-pip install -e .[dev]
-uvicorn app.main:app --reload
-```
-
-> Optional: configure `DATABASE_URL` (default uses local SQLite), `HYPERVISOR_PROVIDER` (default: `proxmox`), `API_KEY` and/or `JWT_SECRET` to protect domain endpoints.
-
-
-
-
-### Blueprint API (contract hardening)
-
-Authentication behavior for `/blueprints`, `/jobs`, `/scenarios`, `/mitre`, and `/ops`:
-
-- if `JWT_SECRET` is configured, send `Authorization: Bearer <access_token>`
-- if `API_KEY` is configured, `x-api-key: <value>` is also accepted
-- open mode is enabled only when both `JWT_SECRET` and `API_KEY` are empty
-- optional JWT hardening:
-  `JWT_ISSUER`, `JWT_AUDIENCE`, `JWT_CLOCK_SKEW_SECONDS`, `JWT_SECRET_FALLBACKS` (for secret rotation)
-- `POST /auth/refresh` uses one-time refresh tokens (replay is rejected)
-- `POST /auth/logout` revokes provided `access_token` and/or `refresh_token`
-- `POST /auth/logout-all` invalidates all JWT sessions of the current user
-- `POST /auth/users/{user_id}/revoke-sessions` (admin) invalidates all active JWT sessions for a user
-- `GET /auth/sessions` returns current user session state (`token_version` + revoked tokens) with `limit`, `offset`, `token_type`, `reason`
-- `GET /auth/users/{user_id}/sessions` (admin) returns session state for a user with the same filters
-
-- `POST /blueprints/validate` validates semantic rules without persisting
-- `POST /blueprints`, `GET /blueprints`, `GET /blueprints/{id}`, `DELETE /blueprints/{id}`
-- `GET /blueprints` supports `name`, `limit`, and `offset` query params
-- Blueprint payload now includes `schema_version` (current supported: `1.0`)
-- Validation/domain errors follow machine-consumable shape:
-
-```json
-{
-  "detail": {
-    "code": "ERROR_CODE",
-    "message": "human readable message"
-  }
-}
-```
-
-### Job orchestration API (current stage)
-
-- `POST /jobs` create asynchronous job (`provision`, `snapshot`, `reset`)
-- `snapshot` now establishes a baseline and `reset` requires this baseline
-- `GET /jobs` list submitted jobs (supports `status`, `action`, `limit`, `offset`)
-- job runner now guards against duplicate in-process execution for the same `job_id`
-- `GET /jobs/{id}` get job status
-
-### Scenario API (current stage)
-
-- `POST /scenarios/runs` start scenario run
-- `GET /scenarios/runs` list runs (supports `status`, `scenario_name`, `limit`, `offset`)
-- `GET /scenarios/runs/{id}` get run status/timeline
-- `POST /scenarios/runs/{id}/stop` request stop
-- scenario runner now uses thread-safe stop handling with per-run cleanup to avoid stale in-memory state
-
-### MITRE API (plugin discovery)
-
-- `GET /mitre/techniques` list loaded techniques and mapped actions
-- response includes plugin source, technique id, tactic tags and executable action
-
-### Frontend concept prototype (White Team)
-
-### Ops API (aggregated operational overview)
-
-- `GET /ops/overview` returns consolidated metrics, status counters and recent events for frontend operational consoles
-- `GET /metrics` exposes Prometheus-compatible HTTP metrics
-- all responses include `x-request-id` header for request correlation
-
-A visual concept prototype is available under `frontend/`:
-
-- `frontend/index.html`: console selector (White/Red/Blue Team)
-- `frontend/network.html`: White Team network operational view with live MITRE, scenarios, blueprints, jobs and dynamic topology/events
-
-Run locally:
-
-```bash
-cd frontend
-python3 -m http.server 8080
-```
-
-Then open `http://localhost:8080`. In `network.html`, configure backend URL/API key to orchestrate `GET /mitre/techniques`, `POST/GET /scenarios/runs`, `POST /scenarios/runs/{id}/stop`, `GET/POST /blueprints`, `GET/POST /jobs`, and `GET /ops/overview`. The topology and stats now react to aggregated runtime state and the live events feed merges backend overview events with local actions.
-
-Frontend JS tooling (lint + test):
-
-```bash
-cd frontend
-npm install
-npm run test
-npm run lint
-```
-
-On Windows, if `node`/`npm` is not recognized right after installation, close and reopen the terminal so PATH is refreshed.
-
-The job checkpoints panel (`steps`) now auto-refreshes while open and renders step failures with explicit start/end/duration metadata plus sanitized error details.
-
-The White Team panel now also supports JWT session observability using:
-- `GET /auth/sessions`
-- `GET /auth/users/{user_id}/sessions` (admin mode)
-with frontend filters (`token_type`, `reason`) and pagination (`limit`, `offset`).
-It also includes direct UI actions for `POST /auth/logout` and `POST /auth/logout-all`.
-
-### Frontend visual previews (current development snapshot)
-
-> Note: these previews are generated from the current prototype state.
-
-![Console selector preview](docs/screenshots/preview-console-selector.svg)
-
-![Network console preview](docs/screenshots/preview-network-console.svg)
-
-### Running tests
-
-```bash
-cd backend
-pytest
-```
-
-### Docker Compose
-
-```bash
-docker compose -f deploy/docker-compose.yml up --build
-```
-
-Compose starts `orion-api` and `postgres` for development persistence.
-
----
-
-## Contributing
-
-We welcome community contributions.
-
-Ways to contribute:
-
-- Implement MITRE technique modules
-- Improve blueprint validation
-- Develop scenario templates
-- Enhance orchestration features
-- Improve documentation
-
-Please read the CONTRIBUTING.md file before submitting pull requests.
+- cybersecurity training
+- Red Team exercises
+- Blue Team training
+- Purple Team simulations
+- academic research
+- cyber defense capability development
 
 ---
 
