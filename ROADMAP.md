@@ -1,84 +1,221 @@
-# Orion Range – Development Roadmap
+# Orion Range Roadmap
 
-## Etapa 0 — Foundation and delivery reliability
-- [x] FastAPI service bootstrap and core routes (`/health`, `/version`, `/blueprints/validate`).
-- [x] Local container runtime (`backend/Dockerfile`, `deploy/docker-compose.yml`).
-- [x] Basic test suite for health/version/blueprint validation.
-- [x] CI workflow for backend (Python 3.11, compile check, pytest).
-- [x] Makefile commands for common backend tasks.
+This roadmap outlines the planned evolution of the **Orion Range platform**, from its initial core infrastructure to advanced cyber range orchestration and adversarial simulation capabilities.
 
-## Etapa 1 — Blueprint contract hardening
-- [x] Semantic validation: duplicate names, unknown networks, CIDR parsing, node-network requirements.
-- [x] Schema versioning field and migration notes.
-- [x] Standardized API error codes for machine-consumable clients.
+Development will follow **progressive phases**, prioritizing the core platform first and introducing advanced features over time.
 
-## Etapa 2 — Persistence layer
-- [x] PostgreSQL service in compose stack.
-- [x] ORM models and SQL migrations (0001–0008).
-- [x] CRUD endpoints for blueprint lifecycle.
-- [x] `org_id` column on all domain tables (migration 0007) — multi-tenant foundation.
+---
 
-## Etapa 3 — Job orchestration
-- [x] Async job model (`pending/running/succeeded/failed`).
-- [x] Job submission/status/list endpoints.
-- [x] Worker execution loop with per-action retry and timeout.
-- [x] `teardown` action added to job runner.
-- [x] `GET /jobs/{id}/steps` endpoint for checkpoint visibility.
+# Phase 1 — Core Platform (MVP)
 
-## Etapa 4 — Hypervisor adapter (Proxmox-first)
-- [x] `HypervisorAdapter` abstract interface with `provision/snapshot/reset/teardown/health_check`.
-- [x] `ProxmoxAdapter` real implementation (proxmoxer, async task polling, dry-run mode).
-- [x] Configurable timeouts per operation via settings (provision=600s, snapshot=120s, reset=180s).
-- [x] Idempotent provision: existing VMs are skipped, not duplicated.
-- [x] `health_check()` endpoint-ready, returns Proxmox version info.
+Goal: build the **minimum functional infrastructure** required to create and run cyber range environments.
 
-## Etapa 5 — Baseline snapshot and deterministic reset
-- [x] Baseline snapshot creation (`snapshot` job).
-- [x] Reset-to-baseline (`reset` job) with repeat-count tracking.
-- [x] Full lifecycle tests: provision → snapshot → reset × N.
+## Scenario Infrastructure
 
-## Etapa 6 — Checkpoint-based job recovery
-- [x] `JobStep` model and `job_steps` table (migration 0006).
-- [x] `JobStepRepository` with `get_or_create / mark_running / mark_done / mark_failed / is_done`.
-- [x] Checkpoint loop in job runner: done steps skipped on retry/recovery.
-- [x] Step plan per action: named atomic steps in ordered DAG.
-- [x] `GET /jobs/{id}/steps` exposes step state for debugging and observability.
-- [x] Full unit test coverage: retry, recovery, failure marking, dedup guard.
+- [ ] Scenario Builder engine  
+- [ ] Blueprint structure (JSON/YAML)  
+- [ ] Host provisioning  
+- [ ] Network provisioning  
+- [ ] Initial Proxmox integration  
+- [ ] Baseline snapshot creation  
+- [ ] Deterministic environment reset  
 
-## Etapa 7 — Scenario simulation engine
-- [x] Scenario schema (steps, timeline, delays).
-- [x] Scenario executor with stop event, timeline tracking, event streaming.
-- [x] API endpoints for scenario start/stop/status.
+## Backend Core
 
-## Etapa 8 — MITRE ATT&CK plugin support
-- [x] Plugin interface (`MitrePlugin` protocol) with `resolve / list_techniques`.
-- [x] Builtin plugin: T1566 (Phishing), T1110 (Brute Force), T1041 (C2 Exfil).
-- [x] Extensible registry — new plugins register at startup.
+- [ ] Orion Range REST API  
+- [ ] Scenario management  
+- [ ] Template management  
+- [ ] Host and network management  
+- [ ] User management  
 
-## Etapa 9 — Production hardening
-- [x] Full AuthN/AuthZ with JWT (Bearer tokens, HS256, access+refresh).
-- [x] Multi-tenant RBAC: `org_id` on all models, `require_roles()` factory, `range_admin/instructor/student`.
-- [x] Structured log correlation: `job_id`, `org_id`, `blueprint_id`, `step_key`, `request_id` in every log line.
-- [x] Garbage collector for orphaned Proxmox resources (`GET /ops/gc` dry-run, `POST /ops/gc` delete).
-- [x] Periodic GC background thread (configurable via `GC_INTERVAL_SECONDS`).
-- [ ] SLOs and alerting runbooks.
+## Roles
 
-## Etapa 10 — Ops observability
-- [x] `/metrics` Prometheus endpoint (HTTP counters by path/status).
-- [x] `x-request-id` correlation header on every response.
-- [x] `/ops/overview` aggregates real DB data (fake telemetry removed).
-- [x] Job retry events surfaced with `warn` level in ops event feed.
-- [x] Prometheus metrics for job duration histogram, step count by action/status, reset latency histogram.
-- [x] `GET /ops/health/hypervisor` — live hypervisor connectivity check.
-- [ ] OpenTelemetry tracing.
+- [ ] White Team role  
+- [ ] Red Team role  
+- [ ] Blue Team role  
 
-## Etapa 11 — Frontend operations console
-- [x] Console selector (White/Red/Blue team entry points).
-- [x] White Team network console with blueprint/job/scenario controls.
-- [x] MITRE techniques integration in network console.
-- [x] Ops overview integration — stats bar now shows real data from `/ops/overview`.
-- [x] `teardown` action available in job submission UI.
-- [x] Job checkpoint steps panel: click "steps" on any job to see step-by-step progress.
-- [x] GC dry-run panel: "GC dry-run" button calls `GET /ops/gc` and shows orphaned VMs.
-- [ ] Real-time topology updates via WebSocket.
-- [ ] Red Team and Blue Team consoles.
+## Access Layer
+
+- [ ] VPN integration  
+- [ ] Scenario access control  
+- [ ] Network scope restrictions for Red Team  
+
+---
+
+# Phase 2 — Scenario Modeling
+
+Goal: enable **complete adversarial scenario modeling**.
+
+## Scenario Builder
+
+- [ ] Network topology editor  
+- [ ] Manual host insertion  
+- [ ] Service configuration  
+- [ ] Vulnerability insertion  
+- [ ] Credential configuration  
+
+## MITRE Integration
+
+- [ ] MITRE ATT&CK technique library  
+- [ ] Mapping techniques to scenarios  
+- [ ] MITRE coverage definition  
+- [ ] Attack chain visualization  
+
+## Scenario Templates
+
+- [ ] Template library  
+- [ ] Scenario cloning  
+- [ ] Scenario versioning  
+- [ ] Template import/export  
+
+---
+
+# Phase 3 — Cyber Range Realism
+
+Goal: simulate **realistic enterprise infrastructures**.
+
+## Corporate Network Simulation
+
+- [ ] Internal networks  
+- [ ] DMZ segments  
+- [ ] Network segmentation  
+- [ ] Wi-Fi networks  
+
+## Device Simulation
+
+- [ ] Workstations  
+- [ ] Corporate endpoints  
+- [ ] Smartphones  
+- [ ] Tablets  
+- [ ] BYOD devices  
+
+## Defense Infrastructure
+
+- [ ] SIEM deployment  
+- [ ] EDR deployment  
+- [ ] IDS/IPS deployment  
+- [ ] Firewall integration  
+
+## Blue Team Operations
+
+- [ ] SIEM access  
+- [ ] Event investigation tools  
+- [ ] Endpoint telemetry  
+- [ ] Centralized logging  
+
+---
+
+# Phase 4 — Hybrid Environments
+
+Goal: support **hybrid cyber-physical scenarios with external assets**.
+
+## External Integration
+
+- [ ] IoT device integration  
+- [ ] OT device integration  
+- [ ] Electronic prototype integration  
+- [ ] External laboratory environments  
+- [ ] Integration gateways  
+
+## Hybrid Cyber-Physical Range
+
+- [ ] External assets represented in topology  
+- [ ] Access control for external devices  
+- [ ] External integration monitoring  
+
+---
+
+# Phase 5 — Visual Platform
+
+Goal: improve **usability and visual control of the environment**.
+
+## Visual Topology Designer
+
+- [ ] Graphical network editor  
+- [ ] Drag-and-drop host placement  
+- [ ] Connection visualization  
+- [ ] Network zone visualization  
+
+## Exercise Control Dashboard
+
+- [ ] White Team control panel  
+- [ ] Active scenario monitoring  
+- [ ] Host state monitoring  
+- [ ] Exercise metrics  
+
+## Observability
+
+- [ ] Attack timeline visualization  
+- [ ] Detection events  
+- [ ] Team activity tracking  
+
+---
+
+# Phase 6 — AI-Assisted Cyber Range
+
+Goal: introduce **intelligent automation for scenario generation**.
+
+## AI Scenario Generator
+
+- [ ] Scenario generation from prompts  
+- [ ] Automatic topology creation  
+- [ ] Vulnerability suggestions  
+- [ ] MITRE technique suggestions  
+- [ ] Blueprint generation  
+
+## AI Copilot
+
+- [ ] Scenario suggestions for White Team  
+- [ ] Scenario validation  
+- [ ] Environment consistency analysis  
+
+---
+
+# Phase 7 — Advanced Features
+
+Goal: transform Orion Range into a **full cyber simulation platform**.
+
+## Multi-Tenant Cyber Range
+
+- [ ] Multiple simultaneous exercises  
+- [ ] Scenario isolation  
+- [ ] Resource management  
+
+## Scenario Analytics
+
+- [ ] Red Team performance metrics  
+- [ ] Blue Team detection metrics  
+- [ ] MITRE coverage analysis  
+
+## Reporting
+
+- [ ] Automated exercise reports  
+- [ ] Attack timeline reports  
+- [ ] Detection and response indicators  
+
+---
+
+# Long-Term Vision
+
+Orion Range aims to become a **fully featured open-source cyber range orchestration platform**, enabling:
+
+- dynamic adversarial environment creation  
+- realistic enterprise infrastructure simulation  
+- hybrid cyber-physical training environments  
+- AI-assisted scenario generation  
+- advanced Red Team vs Blue Team exercises  
+
+---
+
+# Contribution
+
+The project welcomes community contributions.
+
+Potential areas for contribution include:
+
+- infrastructure plugins  
+- scenario templates  
+- MITRE integrations  
+- device simulation modules  
+- defensive tooling integrations  
+- platform improvements  
