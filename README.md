@@ -1,9 +1,14 @@
 # Orion Range
 
+<<<<<<< HEAD
 [🇺🇸 English](README.md) | [🇧🇷 Português](README.pt-BR.md)
 
 **Orion Range** is an open-source **Cyber Range Orchestration Platform** designed to create realistic adversarial cybersecurity environments for **Red Team vs Blue Team exercises**.
 
+=======
+**Orion Range** is an open-source **Cyber Range Orchestration Platform** designed to create realistic adversarial cybersecurity environments for **Red Team vs Blue Team exercises**.
+
+>>>>>>> a5c96b5 (ajuste no README)
 The platform allows security teams to design, deploy, and operate complex cyber training environments where **attacks and defenses occur in controlled and reproducible infrastructures**.
 
 Orion Range enables **White Teams to orchestrate complete enterprise environments**, including vulnerable systems, corporate networks, defensive infrastructure, and simulated user ecosystems.
@@ -13,6 +18,7 @@ Orion Range enables **White Teams to orchestrate complete enterprise environment
 # Why Orion Range
 
 Traditional security labs usually consist of isolated vulnerable machines.
+<<<<<<< HEAD
 
 Orion Range introduces a different concept:
 
@@ -27,6 +33,19 @@ Instead of isolated machines, the platform models:
 - wireless devices
 - external systems
 
+=======
+Orion Range introduces a different concept: **enterprise-scale cyber range orchestration**.
+
+Instead of isolated machines, the platform models:
+
+- corporate networks
+- internal services
+- defensive infrastructure
+- user endpoints
+- wireless devices
+- external systems
+
+>>>>>>> a5c96b5 (ajuste no README)
 This allows realistic adversarial simulations between **Red Teams and Blue Teams**.
 
 ---
@@ -36,7 +55,10 @@ This allows realistic adversarial simulations between **Red Teams and Blue Teams
 ## White Team Orchestration
 
 The **White Team** controls the entire exercise environment.
+<<<<<<< HEAD
 
+=======
+>>>>>>> a5c96b5 (ajuste no README)
 They can:
 
 - design network topologies
@@ -53,11 +75,18 @@ They can:
 ## Red Team Operations
 
 The **Red Team performs manual offensive operations**.
+<<<<<<< HEAD
 
 Orion Range **does not automate attacks**.
 
 Red Team participants access the environment through **VPN** and perform:
 
+=======
+Orion Range **does not automate attacks**.
+
+Red Team participants access the environment through **VPN** and perform:
+
+>>>>>>> a5c96b5 (ajuste no README)
 - exploitation
 - lateral movement
 - privilege escalation
@@ -69,9 +98,14 @@ Red Team participants access the environment through **VPN** and perform:
 ## Blue Team Operations
 
 The **Blue Team monitors and defends the environment**.
+<<<<<<< HEAD
 
 The platform allows deployment of defensive infrastructure including:
 
+=======
+The platform allows deployment of defensive infrastructure including:
+
+>>>>>>> a5c96b5 (ajuste no README)
 - SIEM
 - EDR / XDR
 - IDS / IPS
@@ -102,7 +136,10 @@ White Teams can create environments by defining:
 ## Scenario Template Library
 
 Scenarios can be saved as reusable templates.
+<<<<<<< HEAD
 
+=======
+>>>>>>> a5c96b5 (ajuste no README)
 This allows:
 
 - scenario cloning
@@ -127,7 +164,10 @@ Orion Range includes a **visual network topology builder** allowing administrato
 ## Hybrid Cyber-Physical Environments
 
 The platform supports **integration with external systems**.
+<<<<<<< HEAD
 
+=======
+>>>>>>> a5c96b5 (ajuste no README)
 Examples:
 
 - IoT devices
@@ -163,9 +203,14 @@ Examples include:
 ## MITRE ATT&CK Integration
 
 Scenarios can be mapped to MITRE ATT&CK techniques.
+<<<<<<< HEAD
 
 This enables exercises aligned with real-world adversary behavior including:
 
+=======
+This enables exercises aligned with real-world adversary behavior including:
+
+>>>>>>> a5c96b5 (ajuste no README)
 - Initial Access
 - Execution
 - Lateral Movement
@@ -180,9 +225,14 @@ This enables exercises aligned with real-world adversary behavior including:
 Future versions of Orion Range will support **AI-assisted scenario creation**.
 
 Administrators will be able to generate environments using natural language prompts.
+<<<<<<< HEAD
 
 Example:
 
+=======
+Example:
+
+>>>>>>> a5c96b5 (ajuste no README)
 Create a corporate network with a DMZ web server vulnerable to RCE, an internal Active Directory environment, a database server, and a SIEM monitoring all endpoints.
 
 The AI engine generates a scenario blueprint which can then be edited and deployed by the White Team.
@@ -210,9 +260,14 @@ The platform models **complete corporate ecosystems** rather than isolated machi
 # Development Status
 
 Orion Range is currently under active development.
+<<<<<<< HEAD
 
 Planned features include:
 
+=======
+Planned features include:
+
+>>>>>>> a5c96b5 (ajuste no README)
 - full scenario orchestration engine
 - AI-assisted blueprint generation
 - multi-tenant cyber range support
@@ -231,6 +286,42 @@ Orion Range is designed for:
 - Purple Team simulations
 - academic research
 - cyber defense capability development
+<<<<<<< HEAD
+=======
+
+![Network console preview](docs/screenshots/preview-network-console.svg)
+
+### Running tests
+
+```bash
+cd backend
+pytest
+```
+
+### Docker Compose
+
+```bash
+docker compose -f deploy/docker-compose.yml up --build
+```
+
+Compose starts `orion-api` and `postgres` for development persistence.
+
+---
+
+## Contributing
+
+We welcome community contributions.
+
+Ways to contribute:
+
+- Implement MITRE technique modules
+- Improve blueprint validation
+- Develop scenario templates
+- Enhance orchestration features
+- Improve documentation
+
+Please read the CONTRIBUTING.md file before submitting pull requests.
+>>>>>>> a5c96b5 (ajuste no README)
 
 ---
 
