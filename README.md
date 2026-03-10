@@ -1,7 +1,6 @@
+# Orion Range
 
 [🇺🇸 English](README.md) | [🇧🇷 Português](README.pt-BR.md)
-
-# Orion Range
 
 **Orion Range** is an open-source **Cyber Range Orchestration Platform** designed to create realistic adversarial cybersecurity environments for **Red Team vs Blue Team exercises**.
 
